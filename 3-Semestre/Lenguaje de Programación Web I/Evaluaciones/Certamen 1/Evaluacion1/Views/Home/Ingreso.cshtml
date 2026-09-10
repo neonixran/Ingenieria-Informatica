@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "Ingreso";
+}
+
+<h1>Ingreso</h1>
+
+<br />
+<form asp-action="IngresoAlumno" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Nombres</label></td>
+                <td><input type="text" name="txtNombres" size="29" required /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Apellidos</label></td>
+                <td><input type="text" name="txtApellidos" size="29" required /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Rut</label></td>
+                <td><input type="number" name="txtRut" size="9" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==9) return false;" required />-
+                    <input type="text" name="txtId" size="2" maxlength="1" required /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Fecha Nacimiento</label></td>
+                <td><input type="date" name="txtFecha" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right"><input type="submit" value="Ingresar" /></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<br />
+<div style="width: 100%;margin: 0 auto;">
+    <table border="1" width="100%">
+        <tr>
+            <td style="background:red; color:white; width:10%">RUT</td>
+            <td style="background:red; color:white; width:40%">Nombre Completo</td>            
+            <td style="background:red; color:white; width:20%">Fecha Nacimiento</td>
+            <td style="background:red; color:white; width:10%">Nota Final</td>
+            <td style="background:red; color:white; width:10%">Estado</td>
+            <td style="background:red; color:white; width:10%">Editar nota</td>
+        </tr>
+        @{
+            if(ViewBag.respuesta != null)
+            {
+                foreach (var alumnos in ViewBag.respuesta)
+                {
+                    <tr>
+                        <td>@String.Format("{0}-{1}", alumnos.rut, alumnos.rutId)</td> <!-- En la columna RUT deberá aparecer el RUT del alumno completo -->
+                        <td>@alumnos.nombre</td>
+                        <td>@alumnos.fechaNacimiento</td>
+                        <td>@alumnos.notaFinal</td>
+                        <td>@alumnos.estado</td>
+                        <td>
+                            <form asp-action="Notas" method="post">
+                                <input type="hidden" name="txtEditarNombre" value="@alumnos.nombre" />
+                                <input type="hidden" name="txtEditarRut" value="@alumnos.rut" />
+                                <input type="hidden" name="txtEditatRutId" value="@alumnos.rutId" />
+                                <input type="hidden" name="txtEditarNota" value="@alumnos.notaFinal" />
+                                <input type="submit" value="Editar" />
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+</div>

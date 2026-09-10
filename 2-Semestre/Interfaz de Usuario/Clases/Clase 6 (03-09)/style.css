@@ -1,0 +1,24 @@
+/* CSS usando el selector de ID */
+#title {
+    text-align: center;
+}
+
+/* CSS usando el selector de clase*/
+.btnSend {
+    background-color: aliceblue;
+}
+
+/* CSS usando el selector descendiente */
+p input {
+    color: aliceblue;
+}
+
+/* CSS usando el selector de tipo o etiqueta, aplicará a todos los elementos de la misma etiqueta */
+body {
+    background-color: dodgerblue;
+    color: aliceblue;
+}
+
+p {
+    text-align: center;
+}

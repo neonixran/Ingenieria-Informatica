@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Inicio de Sesión";
+}
+
+<script>
+    function iniciarSesion() {
+        const usuario = $("#txtUsuario").val()
+        const contraseña = $("#txtContraseña").val()
+
+        if (usuario == "") {
+            alert("Usuario no puede encontrarse vacío")
+            return
+        }
+        
+        if (contraseña == "") {
+            alert("Contraseña no puede encontrarse vacía")
+            return
+        }
+
+        $.ajax({
+            url: "/Home/iniciarSesion",
+            method: "POST",
+            data: {
+                USUARIO: usuario,
+                CONTRASEÑA: contraseña
+            },
+            success: function(response) {
+                if (response == "OK") {
+                    window.location.href = "/Home/Usuarios"
+                } else {
+                    alert(response)
+                }
+            }
+        })
+    }
+</script>
+
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="text-center">
+        <h2>Inicio de sesión</h2>
+
+        <div class="col-auto">
+            <div class="form-label row mb-3 mt-4 align-items-center">
+                <label class="form-label col-4 text-end" for="txtUsuario">Usuario:</label>
+
+                <div class="col-7">
+                    <input class="form-control" type="text" maxlength="20" id="txtUsuario" />
+                </div>
+            </div> <!-- Usuario -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-4 text-end" for="txtContraseña">Contraseña:</label>
+
+                <div class="col-7">
+                    <input class="form-control" type="password" maxlength="20" id="txtContraseña" />
+                </div>
+            </div> <!-- Contraseña -->
+        </div>
+
+        <button class="btn btn-primary" onclick="iniciarSesion()">Iniciar sesion</button>
+    </div>
+</div>

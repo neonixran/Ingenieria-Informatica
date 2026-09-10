@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Asignatura";
+}
+<script>
+    $(document).ready(function(){
+        cargarAsignaturas(); // Carga la tabla de de asignaturas al cargar la página.
+    });
+
+    function guardarAsignatura(){
+        const nombre = $("#txtAsignatura").val();
+
+        if (nombre == "") { // Valida que el campo de la asignatura no esté vacío antes de enviar la solicitud.
+            alert("Debe ingresar el nombre de la asignatura");
+        } else {
+            $.ajax({
+                url: "/Home/guardarAsignatura",
+                method: "POST",
+                data: { NOMBRE: nombre },
+                success: function(response) {
+                    if (response != "OK") {
+                        alert(response) // Muestra una alerta si no se pudo guardar la asignatura.
+                    } else {
+                        cargarAsignaturas() // Recarga la tabla tras agregar una nueva asignatura.
+                    }
+
+                    $("#txtAsignatura").val(""); // Limpia el campo.
+                }
+            });
+        }
+    }
+
+    function cargarAsignaturas(){
+        $.ajax({
+            url: "/Home/cargarAsignaturas",
+            method: "GET",
+            success: function(response){
+                if (response.estado == null) {
+                    let tabla = "";
+
+                    $.each(response, function(key, item){
+                        tabla += "<tr>";
+                        tabla += "<td>"+ item.id + "</td>";
+                        tabla += "<td>"+ item.nombre + "</td>";
+                        tabla += "</tr>";
+                    });
+
+                    $("#tbDatos").html(tabla);
+                } else {
+                    alert(response.estado)
+                }
+            }
+        });
+    }
+</script>
+
+
+<div class="text-center">
+    <h1>Ingreso de asignaturas</h1>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="txtAsignatura">Asignatura:</label>
+
+                <div class="col-1">
+                    <input type="text" id="txtAsignatura" value="" />
+                </div>
+            </div> <!-- Textbox asignatura -->
+
+            <div class="mb-3 align-items-center">
+                <button class="btn btn-primary" onclick="guardarAsignatura()">Registrar asignatura</button>
+            </div> <!-- Botón registro -->
+        </div>
+    </div>
+
+    <h5 class="text-start">Lista de asignaturas</h5>
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Código</th>
+                <th>Nombre asignatura</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Stock";
+}
+
+<h1>Stock</h1>
+<br />
+<form asp-action="IngresoStock" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Código producto</label></td>
+                <td><input type="text" name="txtCodigo" style="background-color:lightgray;" size="29" value="@ViewBag.codigoProd" readonly /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Nombre producto</label></td>
+                <td><input type="text" name="txtNombre" style="background-color:lightgray;" size="29" value="@ViewBag.nombreProd" readonly /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Stock</label></td>
+                <td><input type="number" name="txtStock" value="@ViewBag.stockProd" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right"><input type="submit" value="Actualizar" /></td>
+            </tr>
+        </table>
+    </div>
+</form>
+

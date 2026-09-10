@@ -1,0 +1,5 @@
+Caso B:
+1. Ágil
+2.
+ - Adaptabilidad y  Uso recomendado. Al tener que recibir retroalimentación constante, adaptar estos cambios no será un problema con una metodología ágil.
+3. 

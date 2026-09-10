@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewData["Title"] = "Ciudad";
+}
+<script>
+    $(document).ready(function (){
+        cargaPais();
+        cargaRegion();
+        filtraGrilla()
+    });
+
+    function cargaPais(){
+        $.ajax({
+            url: "../Home/cargaDatosPais",
+            method: "POST",
+            async: false,
+            success: function(response){
+                    var opciones = "";
+                    $.each(response, function(key, value){
+                        opciones += "<option value='" + value.idPais + "'>" + value.nombrePais + "</option>";
+                    });
+                    $("#cmbPais").html(opciones);
+            }
+         });
+    }
+
+    function cargaRegion(){
+        var pais = $("#cmbPais").val();
+
+        $.ajax({
+            url: "../Home/cargaDatosRegion",
+            method: "POST",
+            data: {IDPAIS: pais},
+            async: false,
+            success: function(response){
+                    var opciones = "";
+                    $.each(response, function(key, value){
+                        opciones += "<option value='" + value.idRegion + "'>" + value.nombreRegion + "</option>";
+                    });
+                    $("#cmbRegion").html(opciones);
+            }
+         });
+    }
+
+    function guardarDatos(){
+        var region = $("#cmbRegion").val();
+        var ciudad = $("#txtCiudad").val();
+        
+        if(ciudad == ""){
+            alert("Debe ingresar la ciudad.");
+        } else {
+            $.ajax({
+                url: "../Home/guardarCiudad",
+                method: "POST",
+                data: {REGION: region, CIUDAD: ciudad},
+                async: false,
+                success: function(response){
+                    filtraGrilla();
+                    limpiar();
+                }
+            });
+        }
+    }
+    
+    function limpiar(){
+        $("#txtRegion").val("");
+    }
+
+     function filtraGrilla() {
+        var region = $("#cmbRegion").val();
+
+        $.ajax({
+            url: "../Home/cargaDatosCiudad",
+            method: "POST",
+            async: false,
+            data: {IDREGION: region},
+            success: function(response) {
+                var tablaHtml = "";
+                    $.each(response, function(key, value){
+                        tablaHtml += "<tr>";
+                        tablaHtml += "<td>" + value.idCiudad + "</td>";
+                        tablaHtml += "<td>" + value.nombreCiudad + "</td>";
+                        tablaHtml += "</tr>";
+                    });
+                    $("#tbDatos").html(tablaHtml);
+            }
+        })
+    }
+</script>
+
+<h1>Ciudad</h1>
+<label>
+    Seleccione Pais
+</label>
+<br />
+<select id="cmbPais" onchange="cargaRegion()"></select>
+<br />
+<label>
+    Seleccione Region
+</label>
+<br />
+<select id="cmbRegion" onchange="filtraGrilla()"></select>
+<br />
+<label>
+    Ingrese CIUDAD
+</label>
+<br />
+<input type="text" id="txtCiudad" />
+<br />
+<button id="btnIngresar" onclick="guardarDatos()">Guardar</button>
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>CIUDAD</th>
+        </tr>
+    </thead>
+    <tbody id="tbDatos"></tbody>
+</table>
+

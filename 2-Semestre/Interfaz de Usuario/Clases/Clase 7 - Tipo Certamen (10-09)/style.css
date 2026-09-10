@@ -1,0 +1,16 @@
+body {
+    background-image: url("https://intranet.virginiogomez.cl/e_certificado/img/fondo-vg.jpg");
+    font-family: Helvetica;
+    font-size: 20px;
+    color: aliceblue;
+    text-align: center;
+}
+
+#foto_referencial {
+    width: 350px;
+    height: 350px;
+}
+
+footer {
+    background-color: gray;
+}

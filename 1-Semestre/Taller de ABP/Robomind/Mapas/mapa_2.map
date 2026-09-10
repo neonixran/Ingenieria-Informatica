@@ -1,0 +1,27 @@
+#map:def
+
+paint:
+(w,-,5,8)(w,-,6,8)(w,-,7,8)(b,-,5,4)(b,-,6,4)(b,-,7,4)
+
+
+extra:
+palm@5,5
+tree@9,9
+
+map:
+AAAAAAAAAAAAAAAA
+APQ          QPA
+AQ*          *QA
+A      *       A
+A        *     A
+A              A
+A              A
+A@             A
+A        *     A
+A      *       A
+A              A
+A              A
+A              A
+AQ*          *QA
+APQ          QPA
+AAAAAAAAAAAAAAAA

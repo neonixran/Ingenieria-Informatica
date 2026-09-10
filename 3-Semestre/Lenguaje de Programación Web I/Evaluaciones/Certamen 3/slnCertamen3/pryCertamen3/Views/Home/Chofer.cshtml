@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Choferes";
+}
+
+<script>
+    $(document).ready(function (){
+        cargarChoferes()
+
+        $("#btnAccion").text("Registrar chofer").off("click").on("click", registrarChofer)
+    });
+
+    function registrarChofer() {
+        const nombre = $("#txtNombre").val()
+        const estado = $("#cmbEstado").val()
+
+        if (nombre == "") {
+            alert("Nombre no puede encontrarse vacío")
+            return
+        }
+
+        if (estado == "") {
+            alert("Debe seleccionar un estado")
+            return
+        }
+
+        $.ajax({
+            url: "/Home/registrarChofer",
+            method: "POST",
+            data: {
+                NOMBRE: nombre,
+                IDESTADO: estado
+            },
+            success: function(response) {
+                if (response != "OK") {
+                    alert(response);
+                    return;
+                }
+
+                cargarChoferes()
+                limpiar()
+            }
+        })
+    }
+
+    function cargarChoferes() {
+        $.ajax({
+            url: "/Home/cargarChoferes",
+            method: "GET",
+            success: function(response) {
+                var tablaHtml = ""
+
+                $.each(response, function(key, value) {
+                    tablaHtml += "<tr>"
+                    tablaHtml += "<td>" + value.id + "</td>"
+                    tablaHtml += "<td>" + value.nombre + "</td>"
+                    
+                    if (value.estado == 1) {
+                        tablaHtml += "<td>Habilitado</td>"
+                    } else {
+                        tablaHtml += "<td>Deshabilitado</td>"
+                    }
+                    
+                    tablaHtml += "<td> <button class='btn btn-sm btn-warning' onclick='editarChofer(\"" + value.id + "\", \"" + value.nombre + "\", \"" + value.estado + "\")'>Editar</button> </td>"
+                    tablaHtml += "</tr>"
+                });
+
+                $("#tbChoferes").html(tablaHtml);
+            }
+        })
+    }
+
+    function editarChofer(id, nombre, estado) {
+        $("#txtNombre").val(nombre)
+        $("#cmbEstado").val(estado)
+
+        $("#btnAccion").text("Editar chofer").off("click").on("click", function() {
+            const e_nombre = $("#txtNombre").val()
+            const e_estado = $("#cmbEstado").val()
+
+            if (e_nombre == "") {
+                alert("Nombre no puede encontrarse vacío")
+                return
+            }
+
+            $.ajax({
+                url: "/Home/editarChofer",
+                method: "POST",
+                data: {
+                    ID: id,
+                    NOMBRE: e_nombre,
+                    IDESTADO: e_estado,
+                },
+                success: function(response) {
+                    if (response != "OK") {
+                        alert(response);
+                        return;
+                    }
+
+                    cargarChoferes()
+                    limpiar()
+
+                    $("#btnAccion").text("Registrar chofer").off("click").on("click", registrarChofer)
+                }
+            })
+        })
+    }
+
+    function limpiar() {
+        $("#txtNombre").val("")
+        $("#cmbEstado").val("")
+    }
+</script>
+
+<div class="text-center">
+    <h2>Registro de choferes</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 mt-4 align-items-center">
+                <label class="form-label col-3 text-end" for="txtNombre">Nombre:</label>
+
+                <div class="col-8">
+                    <input class="form-control" type="text" maxlength="50" id="txtNombre" />
+                </div>
+            </div> <!-- Nombre -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-3 text-end" for="cmbEstado">Estado:</label>
+
+                <div class="col-8">
+                    <select class="form-select" name="opciones" id="cmbEstado">
+                        <option hidden value="">Eliga una opción...</option>
+                        <option value="1">Habilitado</option>
+                        <option value="2">Deshabilitado</option>
+                    </select>
+                </div>
+            </div> <!-- Estado -->
+
+   
+
+            <button class="btn btn-primary mb-5" id="btnAccion"></button> <!-- Botón de acción (Registrar y editar) -->
+        </div>
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre chofer</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Editar</th>
+                </tr>
+            </thead>
+            <tbody id="tbChoferes">
+            </tbody>
+        </table> <!-- Tabla de choferes -->
+    </div>
+</div>

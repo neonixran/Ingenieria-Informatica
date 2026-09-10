@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico1", "pryPractico1\pryPractico1.csproj", "{B2D789F5-3505-491E-889B-82A5212E54E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico3", "pryPractico3\pryPractico3.csproj", "{EDE956D1-8A3A-4157-B19A-B128F6DE6FA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico4", "pryPractico4\pryPractico4.csproj", "{5A74ACAB-78D9-49DE-8200-63E422854442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico5", "pryPractico5\pryPractico5.csproj", "{766B1A16-CDB0-4D0E-ADF4-1F1D1E6AE9E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico6", "pryPractico6\pryPractico6.csproj", "{8F4ABAD0-E3D5-45B4-A99B-45381E60AFA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico2", "pryPractico2\pryPractico2.csproj", "{471C0838-4A6D-4FA9-B1C7-2F737D4A95C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pryPractico7", "pryPractico7v2\pryPractico7.csproj", "{D83A7BCD-6BFD-49F5-A663-5FA5C3432658}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2D789F5-3505-491E-889B-82A5212E54E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D789F5-3505-491E-889B-82A5212E54E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D789F5-3505-491E-889B-82A5212E54E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D789F5-3505-491E-889B-82A5212E54E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE956D1-8A3A-4157-B19A-B128F6DE6FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE956D1-8A3A-4157-B19A-B128F6DE6FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE956D1-8A3A-4157-B19A-B128F6DE6FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE956D1-8A3A-4157-B19A-B128F6DE6FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A74ACAB-78D9-49DE-8200-63E422854442}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A74ACAB-78D9-49DE-8200-63E422854442}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A74ACAB-78D9-49DE-8200-63E422854442}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A74ACAB-78D9-49DE-8200-63E422854442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766B1A16-CDB0-4D0E-ADF4-1F1D1E6AE9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766B1A16-CDB0-4D0E-ADF4-1F1D1E6AE9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766B1A16-CDB0-4D0E-ADF4-1F1D1E6AE9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766B1A16-CDB0-4D0E-ADF4-1F1D1E6AE9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F4ABAD0-E3D5-45B4-A99B-45381E60AFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4ABAD0-E3D5-45B4-A99B-45381E60AFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4ABAD0-E3D5-45B4-A99B-45381E60AFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4ABAD0-E3D5-45B4-A99B-45381E60AFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{471C0838-4A6D-4FA9-B1C7-2F737D4A95C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{471C0838-4A6D-4FA9-B1C7-2F737D4A95C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{471C0838-4A6D-4FA9-B1C7-2F737D4A95C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{471C0838-4A6D-4FA9-B1C7-2F737D4A95C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83A7BCD-6BFD-49F5-A663-5FA5C3432658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83A7BCD-6BFD-49F5-A663-5FA5C3432658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83A7BCD-6BFD-49F5-A663-5FA5C3432658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83A7BCD-6BFD-49F5-A663-5FA5C3432658}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA80D0DD-881C-49CC-AC02-488CE58C262B}
+	EndGlobalSection
+EndGlobal

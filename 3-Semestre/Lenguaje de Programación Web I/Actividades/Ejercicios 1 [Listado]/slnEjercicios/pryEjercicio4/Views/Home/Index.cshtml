@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="flex-column text-center">
+    <h1>Calculadora Parquimetro</h1>
+    <br />
+    <form asp-action="calcularTarifa" method="post">
+
+        <label>Minutos: </label>
+        <input type="text" name="minutos" />
+
+        <br /><br />
+
+        <input type="submit" value="Calcular Tarifa" />
+    </form>
+    <br />
+    <h2>@ViewBag.mensaje</h2>
+</div>

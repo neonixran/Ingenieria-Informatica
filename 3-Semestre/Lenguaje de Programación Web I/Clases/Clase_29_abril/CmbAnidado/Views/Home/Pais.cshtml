@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Pais";
+}
+<script>
+    $(document).ready(function (){
+        cargaDatos();
+    });
+
+    function guardarDatos(){
+        var pais = $("#txtPais").val();
+        if(pais==""){
+            alert("Debe ingresar el pais.");
+        }else{
+            $.ajax({
+                url: "../Home/guardarPais",
+                method: "POST",
+                data: {PAIS: pais},
+                async: false,
+                success: function(response){
+                    cargaDatos();
+                    limpiar();
+                }
+            });
+        }
+    }
+    function limpiar(){
+        $("#txtPais").val("");
+    }
+    function cargaDatos(){
+        $.ajax({
+                url: "../Home/cargaDatosPais",
+                method: "POST",
+                async: false,
+                success: function(response){
+                    var tablaHtml = "";
+                    $.each(response, function(key, value){
+                        tablaHtml += "<tr>";
+                        tablaHtml += "<td>" + value.idPais + "</td>";
+                        tablaHtml += "<td>" + value.nombrePais + "</td>";
+                        tablaHtml += "</tr>";
+                    });
+                    $("#tbDatos").html(tablaHtml);
+                }
+            });
+    }
+</script>
+
+<h1>Pais</h1>
+
+<label>
+    Ingrese Pais
+</label>
+<br />
+<input type="text" id="txtPais" />
+<br />
+<button id="btnIngresar" onclick="guardarDatos()">Guardar</button>
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>PAIS</th>
+        </tr>
+    </thead>
+    <tbody id="tbDatos"></tbody>
+</table>
+

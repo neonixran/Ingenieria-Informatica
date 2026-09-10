@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Region";
+}
+<script>
+    $(document).ready(function (){
+        cargaPais();
+        filtraGrilla();
+    });
+
+    function cargaPais(){
+        $.ajax({
+            url: "../Home/cargaDatosPais",
+            method: "POST",
+            async: false,
+            success: function(response){
+                    var opciones = "";
+                    $.each(response, function(key, value){
+                        opciones += "<option value='" + value.idPais + "'>" + value.nombrePais + "</option>";
+                    });
+                    $("#cmbPais").html(opciones);
+            }
+         });
+    }
+
+    function guardarDatos(){
+        var pais = $("#cmbPais").val();
+        var region = $("#txtRegion").val();
+        if(region==""){
+            alert("Debe ingresar la region.");
+        }else{
+            $.ajax({
+                url: "../Home/guardarRegion",
+                method: "POST",
+                data: {PAIS: pais, REGION: region},
+                async: false,
+                success: function(response){
+                    filtraGrilla();
+                    limpiar();
+                }
+            });
+        }
+    }
+    
+    function limpiar(){
+        $("#txtRegion").val("");
+    }
+
+    function filtraGrilla() {
+        var pais = $("#cmbPais").val();
+
+        $.ajax({
+            url: "../Home/cargaDatosRegion",
+            method: "POST",
+            data: {IDPAIS: pais},
+            success: function(response) {
+                var tablaHtml = "";
+                    $.each(response, function(key, value){
+                        tablaHtml += "<tr>";
+                        tablaHtml += "<td>" + value.idRegion + "</td>";
+                        tablaHtml += "<td>" + value.nombreRegion + "</td>";
+                        tablaHtml += "</tr>";
+                    });
+                    $("#tbDatos").html(tablaHtml);
+            }
+        })
+    }
+</script>
+
+<h1>Region</h1>
+
+<label>
+    Seleccione Pais
+</label>
+<br />
+<select id="cmbPais" onchange="filtraGrilla()"></select>
+<br />
+<label>
+    Ingrese Region
+</label>
+<br />
+<input type="text" id="txtRegion" />
+<br />
+<button id="btnIngresar" onclick="guardarDatos()">Guardar</button>
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>REGION</th>
+        </tr>
+    </thead>
+    <tbody id="tbDatos"></tbody>
+</table>
+

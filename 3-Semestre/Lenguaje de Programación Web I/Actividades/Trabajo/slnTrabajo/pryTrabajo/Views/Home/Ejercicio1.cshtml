@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Ejercicio1";
+}
+
+<div class="text-center">
+    <h1 class="text-primary mb-4">Calculadora Parquimetro</h1>
+
+    <form asp-action="calcularTarifa" method="post">
+        <div class="mb-3">
+            <label class="h5">Minutos: </label>
+            <input type="text" name="minutos" />
+        </div>
+
+        <input class="btn btn-success mb-3" type="submit" value="Calcular tarifa" />
+    </form>
+
+    <h4 class="text-danger">@ViewBag.mensaje</h4>
+</div>

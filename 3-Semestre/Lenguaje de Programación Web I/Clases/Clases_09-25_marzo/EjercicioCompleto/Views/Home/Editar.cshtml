@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+<br />
+<form asp-controller="Home" asp-action="EditarDatos" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Editar Usuario</label></td>
+                <td><input type="text" name="txtUsuarioNuevo" value="@ViewBag.UsuarioEditado" readonly /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Editar Contraseña</label></td>
+                <td><input type="password" name="txtContraseñaNuevo" value="@ViewBag.ContraseñaEditado" /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Habilitado</label></td>
+                <td>
+                    
+                    <input type="checkbox" name="chkHabilitadoNuevo" @ViewBag.HabilitadoEditado />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right"><input type="submit" value="Editar registro" /></td>
+            </tr>
+        </table>
+    </div>
+</form>

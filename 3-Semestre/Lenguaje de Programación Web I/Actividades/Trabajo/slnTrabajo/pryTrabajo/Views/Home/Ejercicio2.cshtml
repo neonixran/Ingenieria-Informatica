@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Ejercicio2";
+}
+
+<div class="text-center">
+    <h1 class="text-primary">Calculadora de Velocidad</h1>
+    <br />
+    <form asp-action="calcularVelocidad" method="post">
+        <div class="mb-3">
+            <label class="h5">Distancia (metros): </label>
+            <input type="text" name="distancia" />
+        </div>
+
+        <div class="mb-3">
+            <label class="h5">Tiempo (segundos): </label>
+            <input type="text" name="tiempo" />
+        </div>
+
+        <input class="btn btn-success mb-3" type="submit" value="Calcular velocidad" />
+
+        <h4 class="text-danger">@ViewBag.mensaje</h4>
+    </form>
+</div>
+

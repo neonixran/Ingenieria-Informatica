@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewData["Title"] = "Salidas";
+}
+
+<script>
+    $(document).ready(function (){
+        cargarCamiones()
+        filtrarConductores()
+        cargarDatos()
+    });
+
+    function guardarSalida() {
+        var patente = $("#cmbCamiones option:selected").text();
+        var conductor = $("#cmbConductores option:selected").text();
+        var conductorId = $("#cmbConductores option:selected").val();
+        var tipoCarga = $("#cmbCamiones option:selected").val();
+        var fechaHora = $("#dtFechaHora").val();
+
+        if (conductor == "") {
+            alert("Debe existir algún conductor para poder agregarlo.")
+            return
+        }
+
+        if (fechaHora == "") {
+            alert("Debe ingresar la fecha y hora de la salida.")
+            return
+        } else if (fechaHora < $("#dtFechaHora").attr("min") || fechaHora > $("#dtFechaHora").attr("max")) { // Validar que la fecha ingresada este dentro del rango establecido. (2000 hasta hoy)
+            alert("La fecha ingresada no está en el rango permitido.")
+            return
+        }
+
+        $.ajax({
+            url: "../Home/guardarSalida",
+            method: "POST",
+            async: false,
+            data: {
+                Patente: patente,
+                Conductor: conductor,
+                ConductorId: conductorId,
+                TipoCarga: tipoCarga,
+                FechaHora: fechaHora
+            }, // Estos datos se van a la función C# "guardarConductor".
+            success: function(response){
+                $("#cmbConductores option:selected").remove() // Eliminar al conductor del combobox tras agregarlo.
+
+                cargarDatos();
+
+                alert("Salida ingresada con exito")
+            }
+        })
+    }
+
+    function cargarDatos() { // Función para cargar la grilla de datos de los conductores.
+        $.ajax({
+            url: "../Home/cargarSalidas",
+            method: "POST",
+            async: false,
+            success: function(response) {
+                var tablaHtml = ""
+                $.each(response, function(key, value) {
+                    tablaHtml += "<tr>"
+                        tablaHtml += "<td>" + value.id + "</td>"
+                        tablaHtml += "<td>" + value.patenteCamion + "</td>"
+                        tablaHtml += "<td>" + value.nombreConductor + "</td>"
+                        tablaHtml += "<td>" + value.tipoCarga + "</td>"
+                        tablaHtml += "<td>" + value.estado + "</td>"
+                        tablaHtml += "<td>" + value.fechaHora + "</td>"
+
+                        if (value.estado == "Retorno") {
+                            tablaHtml += "<td> <form action='/Home/cambiarEstado' method='post'> <input type='hidden' name='txtId' value='" + value.id + "'/> <input class='btn btn-sm btn-warning' disabled type='submit' value='Retornar'/></form> </td>"
+                        } else {
+                            tablaHtml += "<td> <form action='/Home/cambiarEstado' method='post'> <input type='hidden' name='txtId' value='" + value.id + "'/> <input class='btn btn-sm btn-warning' type='submit' value='Retornar'/></form> </td>"
+                        }
+                    tablaHtml += "</tr>"
+                });
+
+                $("#tbDatos").html(tablaHtml);
+            }
+        })
+    }
+
+    function cargarCamiones() { // Función para cargar la lista de camiones.
+         $.ajax({
+            url: "../Home/cargarCamiones",
+            method: "POST",
+            async: false,
+            success: function(response) {
+                var opciones = "";
+
+                $.each(response, function(key, value) {
+                    opciones += "<option value='" + value.tipoCamion + "'>" + value.patente + "</option>"
+                });
+                
+                $("#cmbCamiones").html(opciones);
+            }
+        })
+    }
+    
+    function filtrarConductores() { // Función para filtrar la lista de conductores según su tipo de carga.
+        var tipoCamion = $("#cmbCamiones").val()
+
+        $.ajax({
+            url: "../Home/cargarConductoresFiltrados",
+            method: "POST",
+            async: false,
+            data: {TipoCamion: tipoCamion},
+            success: function(response) {
+                var opciones = "";
+
+                $.each(response, function(key, value) {
+                    opciones += "<option value='" + value.id + "'>" + value.nombre + "</option>"
+                });
+                
+                $("#cmbConductores").html(opciones);
+            }
+        })
+    }
+</script>
+
+<div class="text-center">
+    <h2>Salidas</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="cmbCamiones">Camión:</label>
+
+                <div class="col-7">
+                    <select class="form-select" id="cmbCamiones" onchange="filtrarConductores()">
+                    </select>
+                </div> <!-- Camiones (Patente) -->
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="cmbConductores">Conductor:</label>
+
+                <div class="col-7">
+                    <select class="form-select" name="opciones" id="cmbConductores"></select>
+                </div> <!-- Conductores -->
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="dtFechaHora">Fecha y hora:</label>
+
+                <div class="col-7">
+                    <input class="form-control" type="datetime-local" min="2000-01-31T23:59" max="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" format id="dtFechaHora" />
+                </div> <!-- Fecha y Hora -->
+            </div>
+
+            <button class="btn btn-primary mb-4" onclick="guardarSalida()">Ingresar salida</button>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Patente camión</th>
+                <th scope="col">Conductor</th>
+                <th scope="col">Tipo carga</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha y Hora</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

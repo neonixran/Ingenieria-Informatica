@@ -1,0 +1,3 @@
+Votos blancos:	236
+Votos nulos:	102
+Votos convertidos:	60

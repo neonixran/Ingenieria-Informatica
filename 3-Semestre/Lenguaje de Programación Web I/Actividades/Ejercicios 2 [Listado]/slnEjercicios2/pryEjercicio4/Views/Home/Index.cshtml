@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Calculadora ventas</h1>
+    <form asp-controller="Home" asp-action="calcularSueldo">
+        <div class="py-3">
+            <label>Venta 1:</label>
+            <input type="number" name="venta1" />
+        </div>
+
+        <div class="py-3">
+            <label>Venta 2:</label>
+            <input type="number" name="venta2" />
+        </div>
+
+        <div class="py-3">
+            <label>Venta 3:</label>
+            <input type="number" name="venta3" />
+        </div>
+
+        <div class="pb-3">
+            <input class="btn btn-success" type="submit" value="Calcular" />
+        </div>
+    </form>
+
+    <h5>@ViewBag.resultado</h5>
+</div>

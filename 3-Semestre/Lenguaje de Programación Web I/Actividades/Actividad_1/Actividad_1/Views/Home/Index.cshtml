@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="align-items-center">Calculadora</h1>
+    <br />
+    <br />
+    <form asp-action="Calcular" method="post">
+        <label>1º Número: </label>
+        <input type="number" name="num1" />
+        <br /><br />
+        <label>2º Número: </label>
+        <input type="number" name="num2" />
+        <br /><br />
+        <label>3º Número: </label>
+        <input type="number" name="num3" />
+        <br /><br />
+        <input type="submit" value="Calcular" />
+    </form>
+    <br /><br />
+    <h4 class="text-danger">@ViewBag.respuesta</h4>
+
+    <br /><br />
+
+
+    <table class="table table-bordered caption-top">
+        <caption>Tabla de datos</caption>
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">1º Número</th>
+                <th scope="col">2º Número</th>
+                <th scope="col">3º Número</th>
+                <th scope="col">Operación</th>
+                <th scope="col">Resultado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (ViewBag.listado != null)
+                {
+                    foreach (var item in ViewBag.listado)
+                    {
+                        <tr>
+                            <td>@item.num1_</td>
+                            <td>@item.num2_</td>
+                            <td>@item.num3_</td>
+                            <td>@item.operacion_</td>
+                            <td>@item.resultado_</td>
+                        </tr>
+                    }
+                };
+            }
+        </tbody>
+    </table>
+</div>

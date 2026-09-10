@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Registrar";
+}
+<script>
+    $(document).ready(function(){
+        $('input#txtRut').attr('maxLength','9').keypress(limitMe);
+        cargaTabla();
+    });
+    function limitMe(e) {
+        if (e.keyCode == 8) { 
+            return true; 
+        }
+        return this.value.length < $(this).attr("maxLength");
+    }
+
+    function ingresar(){
+        var usuario = $("#txtUsuario").val();
+        var rut = $("#txtRut").val();
+        var dv = $("#txtDV").val();
+        var nombres = $("#txtNombres").val();
+        var apellidos = $("#txtApellidos").val();
+        var contrasena = $("#txtContraseña").val();
+        var repetir = $("#txtRepetirContraseña").val();
+
+        if(usuario == ""){
+            alert("Debe ingresar el usuario");
+        }else if (rut == ""){
+            alert("Debe ingresar rut");
+        }else if (dv == ""){
+            alert("Debe ingresar dv");
+        }else if (nombres == ""){
+            alert("Debe ingresar nombres");
+        }else if (apellidos == ""){
+            alert("Debe ingresar apellidos");
+        }else if (contrasena == ""){
+            alert("Debe ingresar la contraseña");
+        }else if(contrasena != repetir){
+            alert("La contraseña debe coincidir");
+        }else{
+            $.ajax({
+                url: "/Home/insertarUsuario",
+                method: "POST",
+                data: {
+                    USR:usuario,
+                    PASS:contrasena,
+                    NOM:nombres,
+                    APE: apellidos,
+                    RUT: rut,
+                    DV: dv,
+
+                },
+                success: function(response){
+                    if(response != "OK"){
+                        alert(response);
+                    }else{
+                        cargaTabla();
+                    }
+                }
+            });
+        }
+    }
+    function cargaTabla(){
+        $.ajax({
+                url: "/Home/cargaUsuario",
+                method: "GET",
+                success: function(response){
+                    var tabla = "";
+                    $.each(response, function(key, item){
+                        tabla += "<tr>";
+                        tabla += "<td class='bordes'>"+ item.usuario_ +"</td>";
+                        tabla += "<td class='bordes'>"+ item.rut_formateado +"</td>";
+                        tabla += "<td class='bordes'>"+ item.nombre_completo +"</td>";
+                        tabla += "<td class='bordes'>"+ "a" +"</td>";
+                        tabla += "</tr>";
+                    });
+                    $("#tbDatos").html(tabla);
+                }
+            });
+    }
+
+</script>
+
+
+<div class="text-center">
+    <div id="LblUsuario">Bienvenido:</div>
+    <table>
+        <tr>
+            <td colspan="2">Ingreso nuevo usuario</td>
+        </tr>
+        <tr>
+            <td>Usuario</td>
+            <td><input type="text" id="txtUsuario" required /></td>
+        </tr>
+        <tr>
+            <td>Rut</td>
+            <td><input style="width:150px;" type="number" id="txtRut" required />-<input type="text" style="width:30px;" id="txtDV" maxlength="1" required /></td>
+        </tr>
+        <tr>
+            <td>Nombres</td>
+            <td><input type="text" id="txtNombres" required /></td>
+        </tr>
+        <tr>
+            <td>Apellidos</td>
+            <td><input type="text" id="txtApellidos" required /></td>
+        </tr>
+        <tr>
+            <td>Contraseña</td>
+            <td><input type="password" id="txtContraseña" required /></td>
+        </tr>
+        <tr>
+            <td>Repetir contraseña</td>
+            <td><input type="password" id="txtRepetirContraseña" required /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button onclick="ingresar()">Ingresar</button></td>
+        </tr>
+    </table>
+</div>
+<br />
+<table>
+    <thead>
+        <tr style="background-color:red; color:white;">
+            <th class="bordes">USUARIO</th>
+            <th class="bordes">RUT</th>
+            <th class="bordes">NOMBRE COMPLETO</th>
+            <th class="bordes">EDITAR</th>
+        </tr>
+    </thead>
+    <tbody id="tbDatos"></tbody>
+</table>

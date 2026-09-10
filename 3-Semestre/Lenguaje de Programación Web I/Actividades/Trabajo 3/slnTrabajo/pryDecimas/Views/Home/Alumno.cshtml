@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Alumnos";
+}
+
+<script>
+    $(document).ready(function() {
+        cargarAlumnos() // Carga la tabla de alumnos al cargar la página.
+    })
+
+
+    function guardarAlumno() {
+        const codigo = $("#txtCodigo").val()
+        const nombres = $("#txtNombres").val()
+        const apellidos = $("#txtApellidos").val()
+
+        if (codigo == "" || nombres == "" || apellidos == "") { // Verifica que todos los campos no estén vacíos antes de enviar la solicitud.
+            alert("Debe ingresar todos los campos")
+            return
+        }
+
+        $.ajax({
+            url: "/Home/guardarAlumno",
+            type: "POST",
+            data: {
+                CODIGO: codigo,
+                NOMBRES: nombres,
+                APELLIDOS: apellidos
+            }, // Guarda los datos ingresados del html al controlador (C#).
+            success: function(response) {
+                if (response != "OK") { 
+                    alert(response) // Muestra una alerta si no se pudo guardar el alumno.
+                } else {
+                    cargarAlumnos() // Recarga la tabla tras agregar un nuevo alumno.
+                }
+
+                limpiar()
+            }
+        })
+    }
+
+    function cargarAlumnos() {
+        $.ajax({
+            url: "/Home/cargarAlumnos",
+            type: "GET",
+            success: function(response) {
+                if (response.estado == null) {
+                    let opciones = "";
+
+                    $.each(response, function(key, item) {
+                        console.log(item)
+                        opciones += "<tr>"
+                            opciones += "<td>" + item.codigo + "</td>"
+                            opciones += "<td>" + item.nombres + "</td>"
+                            opciones += "<td>" + item.apellidos + "</td>"
+                        opciones += "<tr>"
+                    })
+
+                    $("#tbDatos").html(opciones)
+                } else {
+                    alert(response.estado)
+                }
+            }
+        })
+    }
+
+    function limpiar() {
+        $("#txtCodigo").val("")
+        $("#txtNombres").val("")
+        $("#txtApellidos").val("")
+    }
+</script>
+
+<div class="text-center">
+    <h1>Ingreso de alumnos</h1>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="txtCodigo">Código:</label>
+
+                <div class="col-1">
+                    <input type="number" name="codigoAlumno" id="txtCodigo" />
+                </div>
+            </div> <!-- Textbox para código -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="txtNota">Nombres:</label>
+
+                <div class="col-1">
+                    <input type="text" name="nombresAlumno" id="txtNombres" />
+                </div>
+            </div> <!-- Textbox para nombres -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="txtApellidos">Apellidos:</label>
+
+                <div class="col-1">
+                    <input type="text" name="apellidosAlumno" id="txtApellidos" />
+                </div>
+            </div> <!-- Textbox para apellidos -->
+
+            <div class="mb-3 align-items-center">
+                <button class="btn btn-primary" onclick="guardarAlumno()">Registrar alumno</button>
+            </div> <!-- Botón para registrar -->
+        </div>
+    </div>
+
+    <h5 class="text-start">Lista de alumnos</h5>
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Código</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,21 @@
+#navbar_rule { height: 25px }
+
+#background { height: 20rem }
+
+@media (min-width: 768px) {
+    #background { height: 30rem }
+}
+
+#icon { font-size: 25px }
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+[data-bs-theme="dark"] .card { border: 1px solid rgba(255, 255, 255, 0.125); }
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0.5rem 1.75rem 0 rgba(var(--bs-body-color-rgb), 0.15);
+}

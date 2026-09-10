@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Ejercicio3";
+}
+
+<div class="text-center">
+    <h1 class="text-primary">Operativa de números </h1>
+
+    <form asp-action="calcularNumero" method="post">
+        <div class="my-3">
+            <label class="h5">Ingrese un número: </label>
+            <input type="number" name="numero" />
+        </div>
+
+        <input class="btn btn-success mb-3" type="submit" value="Calcular número" />
+
+        <table class="table table-bordered caption-top">
+            <caption>Lista de resultados</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Número</th>
+                    <th scope="col">Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (ViewBag.listado != null)
+                    {
+                        foreach (var item in ViewBag.listado)
+                        {
+                            <tr>
+                                <td>@item.numero_</td>
+                                <td>@item.resultado_</td>
+                            </tr>
+                        }
+                    }
+                    ;
+                }
+            </tbody>
+        </table>
+
+        
+    </form>
+</div>
