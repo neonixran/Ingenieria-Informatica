@@ -23,3 +23,7 @@ Repositorio personal. Contiene material de clases, actividades y evaluaciones de
 ### 📚 [1° Semestre](./1-Semestre)
 * **[Desarrollo de Algoritmos](./1-Semestre/Desarrollo%20de%20algoritmos)**: Diagramas de flujo y Python
 * **[Taller Integrado ABP](./1-Semestre/Taller%20de%20ABP)**: Robomind
+
+------------------------------------------------------------------------------------------
+### Otras cosas
+**[Programas de asignatura](https://drive.google.com/drive/folders/1r2g1ExTwBBUCr11teOpArHFSipwb54Xd?usp=sharing)**
