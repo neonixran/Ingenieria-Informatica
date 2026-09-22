@@ -1,0 +1,24 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+# Java / NetBeans
+**/nbproject/private/
+**/build/
+**/dist/
+/3º Semestre/Lenguaje de Programación O.O I/Prácticos/pryTicket20149/build
+
+# NetBeans — archivos compilados
+**/*.class
+**/*.jar
+**/build/
+**/dist/
+**/.netbeans_automatic_build
+**/.netbeans_update_resources
+**/nbproject/private/
+
+# Archivos de prueba sueltos
+a.py

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="flex-column text-center">
+    <h1>Calculadora IMC</h1>
+    <br />
+    <form asp-action="calcularIMC" method="post">
+
+        <label>Masa (kg): </label>
+        <input type="text" name="masa" />
+
+        <br /><br />
+
+        <label>Estatura (cm): </label>
+        <input type="text" name="estatura" />
+
+        <br /><br />
+
+        <input type="submit" value="Calcular IMC" />
+    </form>
+    <br />
+    <h2>@ViewBag.mensaje</h2>
+</div>

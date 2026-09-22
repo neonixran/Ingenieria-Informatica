@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="CL" data-bs-theme="auto">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porfafolio</title>
+
+    <!-- Icono -->
+    <link rel="shortcut icon" href="Images/icono.png" type="image/x-icon">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Bootstrap 5.3.8 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar bg-body-secondary">
+            <div class="container-fluid mx-1">
+                <a class="navbar-brand">
+                    <!-- Foto y nombre -->
+                    <img src="Images/logo.jpg" id="logo" class="d-inline-block align-text-top rounded-circle me-3"
+                        width="30" height="30" alt="">Josué Bravo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-lg-end" id="navbarNav">
+                    <ul class="navbar-nav nav-underline">
+                        <!-- Scroll a aresentación -->
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#presentación">¿Quien soy?</a>
+                        </li>
+                        <!-- Scroll a proyectos-->
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#proyectos">Proyectos</a>
+                        </li>
+                        <li class="d-none d-lg-inline-block">
+                            <div id="navbar_rule" class="vr my-2"></div>
+                        </li>
+                        <!-- Selector de tema -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i id="theme-icon" class="d-none d-lg-inline-block fa-solid fa-moon me-2"></i>
+                                <span class="d-lg-none">Cambiar tema</span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a class="dropdown-item" data-bs-theme-value="dark"><i
+                                            class="fa-solid fa-moon me-2"></i>Oscuro</a></li>
+                                <li><a class="dropdown-item" data-bs-theme-value="light"><i
+                                            class="fa-solid fa-sun me-2"></i>Claro</a></li>
+                                <li><a class="dropdown-item" data-bs-theme-value="auto"><i
+                                            class="fa-solid fa-circle-half-stroke me-2"></i>Dispositivo</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenido -->
+    <main data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
+        <!-- Background -->
+        <div>
+            <img id="background" src="https://images.alphacoders.com/135/1358310.png" class="img-fluid w-100"
+                alt="Imagen de fondo">
+        </div>
+
+        <!-- Presentación - ¿Quién soy? -->
+        <section class="container-fluid py-3 px-5 bg-body-tertiary" id="presentación">
+            <div class="row">
+                <!-- Foto de perfil -->
+                <div class="col-12 col-lg-2">
+                    <img class="img-fluid rounded-circle shadow-lg d-block mx-auto" src="Images/perfil.jpg"
+                        alt="Imagen de perfil" width="250">
+                </div>
+                <!-- Descripción -->
+                <div class="col col-lg-10">
+                    <p class="h2 text-primary pt-lg-3 pb-lg-2">¿Quién soy?</p>
+                    <p class="h6">
+                        Soy Josué Bravo, estudiante de Ingeniería Informática. Mi formación autodidacta me permitió
+                        adquirir experiencia en lenguajes como Python, Javascript, HTML 5 y LuaU antes de iniciar mis
+                        estudios formales.
+                    </p>
+                    <p class="h6">Mi carrera me permite ahora profundizar y consolidar estas bases, complementando mi
+                        iniciativa con rigor académico, y mi objetivo es unirme a un equipo de desarrollo donde pueda
+                        colaborar, aportar mi proactividad y acelerar mi crecimiento profesional aprendiendo de expertos
+                        en la industria.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habilidades (Lenguajes, Frameworks, Herramientas, Competencias y Cursos) -->
+        <section class="container-fluid py-3 px-5 bg-body-tertiary" id="habilidades">
+            <p class="h1 text-primary mb-2">Habilidades</p>
+            <div class="row">
+                <!-- Lenguajes -->
+                <div class="col-12 col-lg-4 pb-4 pb-lg-0">
+                    <p class="h4"><i class="fa-solid fa-laptop-code me-3"></i>Lenguajes de programación</p>
+                    <ul class="list-group list-group-flush rounded">
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-jira me-3"></i>LuaU
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-python me-3"></i>Python
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-html5 me-3"></i> HTML 5
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-square-js me-3"></i>JavaScript (ES6+)
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-css3 me-3"></i>CSS 3
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-hashtag me-3"></i>C#
+                        </li>
+                    </ul>
+                </div>
+                <!-- Frameworks y Herramientas -->
+                <div class="col-12 col-lg-4 pb-4 pb-lg-0">
+                    <p class="h4"><i class="fa-solid fa-cubes me-3"></i>Frameworks y Herramientas</p>
+                    <ul class="list-group list-group-flush rounded">
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-bootstrap me-3"></i>Bootstrap
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-telegram me-3"></i>Telegraf.js
+                        </li>
+                    </ul>
+                    <hr class="my-1 rounded">
+                    <ul class="list-group list-group-flush rounded">
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-brands fa-git me-3"></i>Git<br><i class="fa-brands fa-github me-3"></i>GitHub
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-solid fa-code me-3"></i>Visual Studio Code
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-solid fa-gears me-3"></i>Visual Studio
+                        </li>
+                    </ul>
+                </div>
+                <!-- Competencias profesionales -->
+                <div class="col-12 col-lg-4 pb-4 pb-lg-0">
+                    <p class="h4"><i class="fa-solid fa-trophy me-3"></i>Competencias</p>
+                    <ul class="list-group list-group-flush rounded">
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-solid fa-square-check me-3"></i>Responsable
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-solid fa-lightbulb me-3"></i>Autodidacta
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-solid fa-comments me-3"></i>Empatía
+                        </li>
+                        <li class="list-group-item bg-body-secondary">
+                            <i class="fa-solid fa-users me-3"></i>Trabajo en equipo
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Cursos -->
+                <div class="col-12 pb-4 pb-lg-0 pt-4">
+                    <p class="h4 mb-2"><i class="fa-solid fa-graduation-cap me-3"></i>Cursos</p>
+
+                    <ul class="list-group list-group-flush rounded">
+                        <li class="list-group-item bg-body-secondary">Fundamentos de la codificación I y II <span
+                                class="badge bg-body-tertiary text-body-secondary rounded-pill float-none float-md-end">Grasshoper
+                                (Google)</span></li>
+                        <li class="list-group-item bg-body-secondary">Programación con JavaScript
+                            <span
+                                class="badge bg-body-tertiary text-body-secondary rounded-pill float-none float-md-end">Sence</span>
+                        </li>
+                        <li class="list-group-item bg-body-secondary">Ciberseguridad en entornos de aprendizajes
+                            digitales <span
+                                class="badge bg-body-tertiary text-body-secondary rounded-pill float-none float-md-end">Sence</span>
+                        </li>
+                        <li class="list-group-item bg-body-secondary">Python <span
+                                class="badge bg-body-tertiary text-body-secondary rounded-pill float-none float-md-end">Santander
+                                Open
+                                Academy</span>
+                        </li>
+                        <li class="list-group-item bg-body-secondary">Google: Inteligencia Artificial y productividad
+                            <span
+                                class="badge bg-body-tertiary text-body-secondary rounded-pill float-none float-md-end">Santander
+                                Open
+                                Academy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiencia -->
+        <section class="container-fluid py-3 px-5 bg-body-tertiary" id="experiencia">
+            <p class="h1 text-primary mb-2">Experiencia</p>
+
+            <div class="accordion accordion-flush" id="accordionFlush">
+                <!-- Ayudante mecánico -->
+                <div class="accordion-item bg-body-secondary rounded-top">
+                    <p class="h2 accordion-header">
+                        <button class="accordion-button collapsed bg-body-secondary rounded-top" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-mecanico" aria-expanded="false"
+                            aria-controls="flush-mecanico">
+                            Ayudante mecánico
+                        </button>
+                    </p>
+                    <div id="flush-mecanico" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+                        <div class="accordion-body text-muted">Mantenimiento y reparaciones menores de autos,
+                            organización de taller y entrega de herramientas.</div>
+                    </div>
+                </div>
+                <!-- Peoneta -->
+                <div class="accordion-item bg-body-secondary">
+                    <p class="h2 accordion-header">
+                        <button class="accordion-button collapsed bg-body-secondary" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-peoneta" aria-expanded="false"
+                            aria-controls="flush-peoneta">
+                            Peoneta
+                        </button>
+                    </p>
+                    <div id="flush-peoneta" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+                        <div class="accordion-body text-muted">Me desempeñé en la carga/descarga de abarrotes, atención
+                            al cliente y gestión de rutas.</div>
+                    </div>
+                </div>
+                <!-- Desarrollo web -->
+                <div class="accordion-item bg-body-secondary rounded-bottom">
+                    <p class="h2 accordion-header">
+                        <button class="accordion-button collapsed bg-body-secondary rounded-bottom" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-mach" aria-expanded="false"
+                            aria-controls="flush-mach">
+                            Desarrollo web
+                        </button>
+                    </p>
+                    <div id="flush-mach" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+                        <div class="accordion-body text-muted">Este fue un proyecto personal en el cual estuve en un
+                            grupo y creé un sitio web y un bot de Telegram en JS. En estos, los usuarios del grupo
+                            podían agregar y consultar los enlaces. Esto les servía a ellos para enviar pagos y cumplir
+                            retos que ponía el banco.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyectos -->
+        <section class="container-fluid py-3 px-5 bg-body-tertiary" id="proyectos">
+            <p class="h1 text-primary mb-2">Mis proyectos</p>
+
+            <div class="row g-lg-3">
+                <!-- Material Lua -->
+                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <img src="Images/MaterialLua.png" class="card-img-top" alt="GUI de Material Lua">
+                        <div class="card-body bg-body-secondary d-flex flex-column">
+                            <p class="fw-bold h5">Material Lua</p>
+                            <p class="card-text">Bifurcación de una librería GUI para Roblox usando LuaU, con
+                                modificaciones y documentación actualizada.
+                            </p>
+                            <div class="mt-auto">
+                                <a href="https://github.com/neonixran/MaterialLua">
+                                    <button class="btn btn-primary text-center w-100 mb-2">
+                                        <i class="fa-solid fa-file-code me-1"></i>
+                                        Fuente
+                                    </button>
+                                </a>
+                                <a href="https://uis.gitbook.io/material/">
+                                    <button class="btn btn-outline-secondary text-center w-100">
+                                        <i class="fa-solid fa-book me-1"></i>Documentación
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mach -->
+                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <img src="Images/MachWeb.png" class="card-img-top" alt="Sitio web de Proyecto Mach">
+                        <div class="card-body bg-body-secondary d-flex flex-column">
+                            <p class="fw-bold h5">Gestor de enlaces - Mach</p>
+                            <p class="card-text">
+                                Bot de Telegram (Telegraf.js) y sitio web (NES.css) para capturar, almacenar y
+                                visualizar enlaces de un grupo.
+                            </p>
+
+                            <div class="mt-auto">
+                                <a href="https://script.google.com/macros/s/AKfycbxW2jb4B2UraF0TBep0RLOleFNwybP1lOK0WLPNvc3mc-Ajy0mRbDeatOGy24-qM2Qv0Q/exec">
+                                    <button class="btn btn-primary text-center w-100">
+                                        <i class="fa-solid fa-link me-1"></i>Ver Sitio Web
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Terrasafe -->
+                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <img src="Images/Terrasafe.png" class="card-img-top img-fluid" alt="Sitio web de Terrasafe">
+                        <div class="card-body bg-body-secondary d-flex flex-column">
+                            <p class="h5 fw-bold">Sitio Web Terrasafe</p>
+                            <p class="card-text">Sitio web desarrollado con Bootstrap para Terrasafe, una empresa
+                                simulada en un proyecto académico.</p>
+
+                            <div class="mt-auto">
+                                <a href="https://neonixran.github.io/terrasafe/">
+                                    <button class="btn btn-primary text-center w-100">
+                                        <i class="fa-solid fa-link me-1"></i>Ver Sitio Web
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Scripts Roblox -->
+                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <img src="Images/Roblox.png" class="card-img-top img-fluid" alt="Script Roblox">
+                        <div class="card-body bg-body-secondary d-flex flex-column   ">
+                            <p class="h5 fw-bold">Scripts Roblox</p>
+                            <p class="card-text">Colección de diversos scripts que desarrollé con y para la comunidad de
+                                Roblox utilizando el lenguaje LuaU.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section class="container-fluid py-3 px-5 bg-body-tertiary" id="contacto">
+            <p class="h1 text-primary mb-2">Contacto</p>
+
+            <form class="needs-validation" action="https://formsubmit.co/0f7e03f6543a01c1671708356c781c37" method="POST"
+                novalidate>
+                <!-- Asunto -->
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control bg-body-secondary" id="correoFlotante" name="correo"
+                        placeholder="" required>
+                    <label for="correoFlotante">Correo</label>
+
+                    <div class="invalid-feedback">
+                        Proporcione un correo
+                    </div>
+                </div>
+                <!-- Mensaje -->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control bg-body-secondary" id="mensajeFlotante" name="mensaje" placeholder=""
+                        required></textarea>
+                    <label for="mensajeFlotante">Mensaje</label>
+
+                    <div class="invalid-feedback">
+                        Escriba un mensaje
+                    </div>
+                </div>
+
+                <div class="d-grid col-10 col-lg-2 mx-auto mx-lg-0">
+                    <button type="submit" class="btn btn-outline-primary"><i
+                            class="fa-regular fa-paper-plane me-2"></i>Enviar</button>
+                </div>
+
+                <!-- Opciones de FormSubmit -->
+                <input type="hidden" name="_template" value="box">
+                <input type="hidden" name="_next" value="https://neonixran.github.io/JosueBravo/#correoEnviado">
+            </form>
+        </section>
+
+        <!-- Mensaje contacto -->
+        <div id="correoEnviado" class="modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">¡Gracias!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>El mensaje ha sido enviado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="container-fluid pt-1 bg-body-secondary">
+        <div class="row text-center text-lg-start">
+            <!-- Derechos de autor -->
+            <div class="col-12 col-lg-6 mt-lg-0 pt-2">
+                <p>© 2025 Josué Bravo - Todos los derechos reservados</p>
+            </div>
+            <!-- Redes sociales -->
+            <div class="col-12 col-lg-6 mt-lg-0 pt-2">
+                <!-- LinkedIn -->
+                <a class="text-body link-underline link-underline-opacity-0 float-end"
+                    href="https://www.linkedin.com/in/josu%C3%A9-b-848690348/"><i id="icon"
+                        class="fa-brands fa-linkedin me-2"></i>
+                </a>
+                <!-- Instagram -->
+                <a class="text-body link-underline link-underline-opacity-0 float-end"
+                    href="https://www.instagram.com/n_n.aleesh/"><i id="icon" class="fa-brands fa-instagram me-2"></i>
+                </a>
+                <!-- Github -->
+                <a class="text-body link-underline link-underline-opacity-0 float-end"
+                    href="https://github.com/neonixran/"><i id="icon" class="fa-brands fa-github me-2"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap y Popper CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous">
+        </script>
+
+    <!-- Script (Tema, Validación, Foto) -->
+    <script src="script.js"></script>
+</body>
+
+</html>

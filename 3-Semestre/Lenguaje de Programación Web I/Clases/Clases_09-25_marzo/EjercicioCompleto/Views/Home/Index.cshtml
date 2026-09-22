@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Inicio sesión";
+}
+
+<br />
+<form asp-controller="Home" asp-action="validar" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Usuario</label></td>
+                <td><input type="text" id="txtUsuario" name="txtUsuario" /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Contraseña</label></td>
+                <td><input type="password" id="txtContraseña" name="txtContraseña" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Ingresar" /></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<br />
+<h1 style="color:red;">@ViewBag.respuesta</h1>

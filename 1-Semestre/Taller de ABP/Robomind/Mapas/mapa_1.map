@@ -1,0 +1,22 @@
+#map:def
+
+paint:
+(w,.,14,8)
+
+map:
+AAAAAAAAAAAAAAAA
+APQ    *     QPA
+AQ            QA
+A              A
+A              A
+A              A
+A              A
+A@             A
+A              A
+A              A
+A              A
+A              A
+A              A
+AQ            QA
+APQ    *     QPA
+AAAAAAAAAAAAAAAA

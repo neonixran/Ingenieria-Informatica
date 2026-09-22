@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h1>Eliminar</h1>
+<br />
+<div style="width: 100%;margin: 0 auto;">
+    <h1 style="color:red">¿Realmente desea eliminar al usuario @ViewBag.datoUsuario?</h1>
+    <br />
+    <div style="width: 100%;margin: 0 auto;">
+        <table style ="width:100%">
+            <tr>
+                <td style="width:50%">
+                    <form asp-action="confirmaVolver">
+                        <input type="submit" value="Cancelar" />
+                    </form>
+                </td>
+                <td style="width:50%; text-align:right">
+                    <form asp-action="confirmaEliminar">
+                        <input type="hidden" name="txtUsuarioDatoEliminar" value="@ViewBag.datoUsuario" />
+                        <input type="submit" value="Confirmar" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+

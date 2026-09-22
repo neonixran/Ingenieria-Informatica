@@ -1,0 +1,10 @@
+1.
+ - Entender antes de construir.
+ - Pensar en mantenimiento.
+ - Planificar la reutilización.
+2.
+ - Si parte del equipo abandona el desarrollo o llega alguien nuevo, sin documentación no se podrá entender que se está programando.
+ - Sin pruebas no se sabrá si las funciones funcionan realmente y se descubrirá cuando ya se haya lanzado.
+ - Sin planificación nadie sabe sus funciones ni como organizarse.
+3.
+ - Entender el problema, pensar en los requisitos y planificar que hará cada uno del equipo.

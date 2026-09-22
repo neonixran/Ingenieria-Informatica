@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+      $(document).ready(function (){
+          cargarGrilla();
+      });
+
+    function guardarCotizacion() {
+        var costo = $("#txtCosto").val();
+        var porcentaje = $("#txtPorcentaje").val();
+
+        if (costo == "") {
+            alert("Debe ingresar el valor del vehiculo.");
+            return;
+        } else if (costo <= 0) {
+            alert("El valor del vehiculo no puede ser inferior a $0.");
+            return;
+        } else if (porcentaje == "") {
+            alert("Debe ingresar el porcentaje del pie.");
+            return;
+        } else if (porcentaje < 0 || porcentaje > 80) {
+            alert("El porcentaje del pie debe estar entre 0% y 80%.");
+            return;
+        }
+
+        $.ajax({
+            url: "../Home/guardarCotizacion",
+            method: "POST",
+            data: {VALORVEHICULO: costo, PORCENTAJEPIE: porcentaje}, // Estos datos se van a la función C# "guardarCotización" que es la que está en la url
+            async: false,
+            success: function(response){
+                cargarGrilla();
+                limpiar();
+            }
+        })
+    }
+
+    function cargarGrilla() {
+        $.ajax({
+            url: "../Home/cargarCotizaciones", // Toma la función "guardarCotizaciones" de C# y trae la grilla de datos
+            method: "POST",
+            async: false,
+            success: function(response){
+                var tablaHtml = "";
+                $.each(response, function(key, value){
+                    tablaHtml += "<tr>";
+                        tablaHtml += "<td>" + value.valorVehiculo_ + "</td>";
+                        tablaHtml += "<td>" + value.porcentajePie_ + "</td>";
+                        tablaHtml += "<td>" + value.montoFinanciar_ + "</td>";
+                        tablaHtml += "<td>" + value.planAsignado_ + "</td>";
+                        tablaHtml += "<td>" + value.totalPagar_ + "</td>";
+                        tablaHtml += "<td>" + value.cuota12_ + "</td>";
+                        tablaHtml += "<td>" + value.cuota24_ + "</td>";
+                        tablaHtml += "<td>" + value.cuota48_ + "</td>";
+                    tablaHtml += "</tr>";
+                }); // Guarda los datos en la grilla de html
+               
+                $("#tbDatos").html(tablaHtml);
+            }
+        });
+    }
+   
+    function limpiar(){
+        $("#txtPorcentaje").val("");
+    }
+</script>
+
+<div class="text-center">
+    <div class="mb-3">
+        <label class="text-end" for="txtCosto">Costo total del vehiculo:</label>
+        <input id="txtCosto" type="number" />
+    </div>
+    <div class="mb-3">
+        <label class="text-end" for="txtPorcentaje">Porcentaje del pie a pagar:</label>
+        <input id="txtPorcentaje" type="number" />
+    </div>
+
+    <button class="btn btn-primary mb-3" onclick="guardarCotizacion()">Realizar cotización</button>
+
+    <h5 class="text-start">Lista de cotizaciones</h5>
+    <table class="table caption-top">
+        <thead>
+            <tr>
+                <th scope="col">Valor vehículo</th>
+                <th scope="col">% del pie</th>
+                <th scope="col">Monto a financiar</th>
+                <th scope="col">Plan adquirido</th>
+                <th scope="col">Total a pagar</th>
+                <th scope="col">En 12 meses (2%)</th>
+                <th scope="col">En 24 meses (5%)</th>
+                <th scope="col">En 48 meses (10%)</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

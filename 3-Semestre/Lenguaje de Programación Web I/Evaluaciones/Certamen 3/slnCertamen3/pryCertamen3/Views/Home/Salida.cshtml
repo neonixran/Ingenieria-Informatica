@@ -1,0 +1,258 @@
+﻿@{
+    ViewData["Title"] = "Salidas";
+}
+
+<script>
+    $(document).ready(function (){
+        cargarPlantas()
+        filtrarChoferes()
+        cargarSalidas()
+    });
+
+    function cargarPlantas() {
+        $.ajax({
+            url: "/Home/cargarPlantas",
+            method: "GET",
+            success: function(response) {
+                let opciones = "<option hidden value=''>Eliga una opción...</option>"
+                
+                $.each(response, function(key, item) {
+                    opciones += "<option value='" + item.id + "'>" + item.nombre + "</option>"
+                })
+                
+                $("#cmbPlanta").html(opciones)
+                
+                filtrarCamiones()
+            }
+        })
+    }
+
+    function filtrarCamiones() {
+        const planta = $("#cmbPlanta :selected").text()
+
+        $.ajax({
+            url: "/Home/filtrarCamiones",
+            method: "POST",
+            data: {
+                PLANTA: planta
+            },
+            success: function(response) {
+                let opciones = "<option hidden value=''>Eliga una opción...</option>"
+
+                if (response.length == 0) {
+                    if ($("#cmbPlanta :selected").val() != "") {
+                        $("#cmbCamion").prop("disabled", true)
+                        
+                        opciones = "<option hidden value=''>Sin opciones...</option>"
+                    } else {
+                        $("#cmbCamion").prop("disabled", true)
+                    }
+                } else {
+                    $("#cmbCamion").prop("disabled", false)
+                }
+
+                $.each(response, function(key, item) {
+                    opciones += "<option value='" + item.codigo + "'>" + item.codigo + "</option>"
+                })
+                
+                $("#cmbCamion").html(opciones)
+            }
+        })
+    }
+
+    function filtrarChoferes() {
+        $.ajax({
+            url: "/Home/filtrarChoferes",
+            method: "GET",
+            success: function(response) {
+                let opciones = ""
+                
+                if (response.length == 0) {
+                    $("#cmbChofer").prop("disabled", true)
+                    opciones = "<option hidden value=''>Sin opciones...</option>"
+                } else {
+                    $("#cmbChofer").prop("disabled", false)
+                    opciones = "<option hidden value=''>Eliga una opción...</option>"
+                }
+                
+                $.each(response, function(key, item) {
+                    opciones += "<option value='" + item.id + "'>" + item.nombre + "</option>"
+                })
+                    
+                $("#cmbChofer").html(opciones)
+            }
+        })
+    }
+
+    function registrarSalida() {
+        const fecha = $("#dtFecha").val()
+        const planta = $("#cmbPlanta").val()
+        const camion = $("#cmbCamion").val()
+        const chofer = $("#cmbChofer").val()
+
+        if (fecha == "") {
+            alert("Fecha no puede encontrarse vacía")
+            return
+        }
+
+        if (planta == "") {
+            alert("Debe seleccionar una planta")
+            return
+        }
+
+        if (camion == "") {
+            alert("Debe seleccionar un camión")
+            return
+        }
+
+        if (chofer == "") {
+            alert("Debe seleccionar un chofer")
+            return
+        }
+
+        $.ajax({
+            url: "/Home/registrarSalida",
+            method: "POST",
+            data: {
+                FECHA: fecha,
+                IDPLANTA: planta,
+                CODCAMION: camion,
+                IDCHOFER: chofer
+            },
+            success: function(response) {
+                if (response != "OK") {
+                    alert(response);
+                    return;
+                }
+
+                cargarSalidas()
+
+                limpiar()
+            }
+        })
+    }
+
+    function cargarSalidas() {
+        $.ajax({
+            url: "/Home/cargarSalidas",
+            method: "GET",
+            success: function(response) {
+                var tablaHtml = ""
+
+                $.each(response, function(key, value) {
+                    tablaHtml += "<tr>"
+                    tablaHtml += "<td>" + value.id + "</td>"
+                    tablaHtml += "<td>" + value.fecha + "</td>"
+                    tablaHtml += "<td>" + value.planta + "</td>"
+                    tablaHtml += "<td>" + value.codCamion + "</td>"
+                    tablaHtml += "<td>" + value.chofer + "</td>"
+                    tablaHtml += "<td>" + value.estado + "</td>"
+                    tablaHtml += "<td>" + value.usuario + "</td>"
+                  
+                    if (value.idEstado == 1) {
+                        tablaHtml += "<td> <button class='btn btn-sm btn-warning' onclick='estadoSalida(\"" + value.id + "\", 2)'>Retornar</button> </td>"
+                        tablaHtml += "<td> <button class='btn btn-sm btn-warning' onclick='estadoSalida(\"" + value.id + "\", 3)'>Rechazar</button> </td>"
+                    } else {
+                        tablaHtml += "<td></td>"
+                        tablaHtml += "<td></td>"
+                    }
+
+                    tablaHtml += "</tr>"
+                });
+
+                $("#tbSalidas").html(tablaHtml);
+            }
+        })
+    }
+
+    function estadoSalida(id, idEstado) {
+        if (confirm("¿Desea " + (idEstado == 2 ? "retornar el" : "rechazar la salida del") + " camión seleccionado?")) {
+            $.ajax({
+                url: "/Home/estadoSalida",
+                method: "POST",
+                data: {
+                    ID: id,
+                    iDESTADO: idEstado
+                },
+                success: function(response) {
+                    if (response != "OK") {
+                        alert(response);
+                        return;
+                    }
+
+                    cargarSalidas()
+                }
+            })
+        }
+    }
+
+    function limpiar() {
+        $("#dtFecha").val("")
+        $("#cmbPlanta").val("")
+        $("#cmbCamion").html("<option hidden value=''>Eliga una opción...</option>").prop("disabled", true)
+        $("#cmbChofer").val("")
+    }
+</script>
+
+<div class="text-center">
+    <h2>Registro de salidas</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 mt-4 align-items-center">
+                <label class="form-label col-4 text-end" for="txtCodigo">Fecha de salida:</label>
+
+                <div class="col-8">
+                    <input class="form-control" type="date" min="2000-01-31" id="dtFecha" />
+                </div>
+            </div> <!-- Fecha -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-4 text-end" for="cmbPlanta">Planta:</label>
+
+                <div class="col-8">
+                    <select class="form-select" name="opciones" onchange="filtrarCamiones()" id="cmbPlanta">
+                    </select>
+                </div>
+            </div> <!-- Planta -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-4 text-end" for="cmbCamion">Camión:</label>
+
+                <div class="col-8">
+                    <select class="form-select" name="opciones" id="cmbCamion" disabled>
+                    </select>
+                </div>
+            </div> <!-- Camión -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-4 text-end" for="cmbChofer">Chofer:</label>
+
+                <div class="col-8">
+                    <select class="form-select" name="opciones" id="cmbChofer">
+                    </select>
+                </div>
+            </div> <!-- Chofer -->
+
+            <button class="btn btn-primary mb-5" onclick="registrarSalida()">Registrar salida</button> <!-- Botón para registrar -->
+        </div>
+
+        <table class="table table-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID salida</th>
+                    <th scope="col">Fecha salida</th>
+                    <th scope="col">Planta</th>
+                    <th scope="col">Camión</th>
+                    <th scope="col">Chofer</th>
+                    <th scope="col">Estado salida</th>
+                    <th scope="col">Usuario</th>
+                    <th id="thRetornar" scope="col">Retornar</th>
+                    <th id="thRechazar" scope="col">Rechazar</th>
+                </tr>
+            </thead>
+            <tbody id="tbSalidas">
+            </tbody>
+        </table> <!-- Tabla de camiones -->
+    </div>
+</div>

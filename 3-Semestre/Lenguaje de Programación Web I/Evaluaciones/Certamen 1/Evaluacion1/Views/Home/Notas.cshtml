@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Notas";
+}
+
+<h1>Notas</h1>
+<br />
+<form asp-action="IngresoNotas" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Nombre Completo</label></td>
+                <td><input type="text" name="txtNombreNota" style="background-color:lightgray;" value="@ViewBag.nombreCompleto" size="29" readonly /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>RUT</label></td>
+                <td>
+                    <input type="number" name="txtRutNota" value ="@ViewBag.rut" style="background-color:lightgray;" size="9" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==9) return false;" required readonly />-
+                    <input type="text" name="txtIdNota" value="@ViewBag.rutId" style="background-color:lightgray;" size="2" maxlength="1" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Nota</label></td>
+                <td><input type="number" name="txtNota" value="@ViewBag.notaFinal" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right"><input type="submit" value="Actualizar" /></td>
+            </tr>
+        </table>
+
+        <h5>@ViewBag.mensaje</h5>
+    </div>
+</form>
+

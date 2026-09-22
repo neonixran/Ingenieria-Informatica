@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Contacto</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <img src="https://ipvg.s3.amazonaws.com/static_cdn/images/logo-vg.png" id="logo-vg">
+        <h1>Alumnos Escuela Negocio y Tecnología</h1>
+    </header>
+    <main>
+        <form action="#" method="get">
+            <p>Indique su nombre</p>
+            <input type="text" name="nombre" maxlength="40" required>
+
+            <p>Indique su correo</p>
+            <input type="email" name="email" maxlength="40" required>
+
+            <p>
+                <label for="carreras">Seleccione carrera:</label><br>
+                <select name="carreras" id="carreras">
+                    <option value="" disabled selected>Carrera</option>
+                    <option value="logistica">Ingeniería en Gestión Logística</option>
+                    <option value="maritimo_portuaria">Ingeniería en Logística Marítimo Portuaria</option>
+                    <option value="administración">Ingeniería en Administración</option>
+                </select>
+            </p>
+
+            <input type="text" name="informática" value="Ingeniería Informática" disabled>
+
+            <p>
+                <input type="checkbox" name="contacto_escuela" checked>
+                <label>Deseo contactarme con alumnos de la escuela de mi Escuela con fines academicos</label>
+            </p>
+
+            <input type="submit" name="enviar" value="Enviar">
+        </form>
+    </main>
+    <footer>
+        Derechos Reservados Ingeniería en Informática IPVG 2025-2
+    </footer>
+</body>
+
+</html>

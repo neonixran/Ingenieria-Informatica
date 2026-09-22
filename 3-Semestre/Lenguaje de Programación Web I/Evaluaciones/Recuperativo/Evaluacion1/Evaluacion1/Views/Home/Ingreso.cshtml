@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Ingreso";
+}
+
+<h1>Ingreso Producto</h1>
+
+<br />
+<form asp-action="IngresoProducto" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Código producto</label></td>
+                <td><input type="number" name="txtCodigo" /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Nombre producto</label></td>
+                <td><input type="text" name="txtNombre" /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Precio producto</label></td>
+                <td><input type="number" name="txtPrecio" /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Stock producto</label></td>
+                <td><input type="number" name="txtStock" /></td>
+            </tr>            
+            <tr>
+                <td colspan="2" style="text-align:right">
+                    <input type="submit" value="Guardar" />
+                </td>
+            </tr>
+        </table>
+        <br /><br />
+        <a class="text-danger">@ViewBag.mensaje</a>
+    </div>
+</form>
+<br />
+<div style="width: 100%;margin: 0 auto;">
+    <table border="1" width="100%">
+        <tr>
+            <td style="background:red; color:white; width:20%">CÓDIGO PRODUCTO</td>
+            <td style="background:red; color:white; width:40%">NOMBRE PRODUCTO</td>
+            <td style="background:red; color:white; width:20%">PRECIO</td>
+            <td style="background:red; color:white; width:10%">STOCK</td>
+            <td style="background:red; color:white; width:10%">EDITAR STOCK</td>
+        </tr>
+        <tr>
+            @{
+                if (ViewBag.listadoProd != null)
+                {
+                    foreach (var producto in ViewBag.listadoProd)
+                    {
+                        <tr>
+                            <td>@producto.codigo</td>
+                            <td>@producto.nombre</td>
+                            <td>@producto.precio</td>
+                            <td>@producto.stock</td>
+                            <td>
+                                <form asp-action="Stock" method="post">
+                                    <input type="hidden" name="txtEditarCodigo" value="@producto.codigo"/>    
+                                    <input type="hidden" name="txtEditarNombre" value="@producto.nombre" />
+                                    <input type="hidden" name="txtEditarStock" value="@producto.stock" />
+
+                                    <input type="submit" value="Editar" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tr>
+    </table>
+</div>

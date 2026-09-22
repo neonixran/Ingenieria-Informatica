@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1>Convertidor cm a pies</h1>
+    <form asp-controller="Home" asp-action="calcularPies">
+        <div class="py-3">
+            <label>Ingrese centimetros: </label>
+            <input type="text" name="centimetros"/>
+        </div>
+        <div class="pb-3">
+            <input class="btn btn-success" type="submit" value="Convertir" />
+        </div>
+    </form>
+
+    <h4>@ViewBag.resultado</h4>
+</div>

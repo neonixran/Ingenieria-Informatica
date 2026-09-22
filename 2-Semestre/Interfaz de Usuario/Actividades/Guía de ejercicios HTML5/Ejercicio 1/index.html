@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PYME SA</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <img src="./Logo_VG.png" id="logo" alt="logo IPVG">
+        <h1>Formulario de registro</h1>
+    </header>
+    <section>
+        <form action="#" method="get" name="form1" id="form1">
+            <p>
+                <label>Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="ej. Juan" maxlength="40" size="14" required>
+            </p>
+            <p>
+                <label>Apellido</label>
+                <input type="text" name="apellido" id="apellido" placeholder="ej. Peréz" maxlength="40" size="14" required>
+            </p>
+            <p>
+                <label>Sexo</label>
+                <input type="radio" name="sexo" id="h_sexo" value="hombre">
+                <label for="h_sexo">Hombre</label>
+
+                <input type="radio" name="sexo" id="m_sexo" value="mujer">
+                <label for="m_sexo">Mujer</label>
+
+                <input type="radio" name="sexo" id="o_sexo" value="otro">
+                <label for="o_sexo">Otro</label>
+            </p>
+            <p>
+                <label>Correo electrónico</label>
+                <input type="email" name="email" id="email" placeholder="ej. juan.perez@gmail.com" maxlength="40" size="19" required>
+            </p>
+            <p>
+                <label class="inline">Deseo recibir información sobre novedades y ofertas</label>
+                <input type="checkbox" name="novedades" id="novedades" checked>
+            </p>
+            <p>
+                <label>Celular</label>
+                <input type="tel" name="tel" id="tel" placeholder="ej. 912345678" maxlength="9" pattern="[1-9]{9}" required>
+            </p>
+            <p>
+                <label class="inline">Declaro haber leido y aceptar las condiciones generales del programa y la normativa sobre protección de datos</label>
+                <input type="checkbox" name="condiciones" id="condiciones">
+            </p>
+
+            <input type="submit" name="enviar" title="Enviar" id="btnSend">
+        </form>
+    </section>
+    <footer>
+        <p>Derechos reservados Alesh</p>
+    </footer>
+</body>
+</html>

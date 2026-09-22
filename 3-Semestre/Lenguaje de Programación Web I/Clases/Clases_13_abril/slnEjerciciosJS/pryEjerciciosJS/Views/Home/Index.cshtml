@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    function validar() {
+        var dato = document.getElementById("txtDatos")
+
+        if (dato.value == "") {
+            alert("Texto no puede estar vacio")
+            return;
+        }
+
+        alert("Hola " + dato.value)
+        dato.value = ""
+    }
+
+    function sumar() {
+        var num1 = document.getElementById("txtn1")
+        var num2 = document.getElementById("txtn2")
+
+        if (num1.value == "" || num2.value == "") {
+            alert("Debe ingresar numeros");
+            return;
+        }
+
+        var resultado = parseInt(num1.value) + parseInt(num2.value);
+        alert("El resultado es " + resultado)
+    }
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<br />
+<input type="text" id="txtDatos"/>
+<br /><br />
+<button id="btnValidar" onclick="validar()">Validar</button>
+
+<br /><br />
+<input type="number" id="txtn1" />
+<br />
+<br />
+<input type="number" id="txtn2" />
+<br />
+<br />
+<button id="btnValidar" onclick="sumar()">Calcular</button>

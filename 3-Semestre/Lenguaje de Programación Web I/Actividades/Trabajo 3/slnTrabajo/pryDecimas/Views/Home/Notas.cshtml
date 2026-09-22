@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Notas";
+}
+
+<script>
+    $(document).ready(function() {
+        cargarAlumnos() // Carga la lista de asignaturas para agregarlas al combobox al cargar la página.
+        cargarAsignaturas() // Carga la lista de alumnos para agregarlos al combobox al cargar la página.
+
+        cargarNotas() // Carga la lista de notas al cargar la página.
+    })
+
+    function cargarAsignaturas() {
+        $.ajax({
+            url: "/Home/cargarAsignaturas",
+            type: "GET",
+            success: function(response) {
+                if (response.estado == null) {
+                    let opciones = ""
+
+                    $.each(response, function(key, item) {
+                        opciones += "<option value='" + item.id + "'>" + item.nombre + "</option>"
+                    })
+
+                    $("#cmbAsignatura").html(opciones)
+                } else {
+                    alert(response.estado)
+                }
+            }
+        })
+    }
+
+    function cargarAlumnos() {
+        $.ajax({
+            url: "/Home/cargarAlumnos",
+            type: "GET",
+            success: function(response) {
+                if (response.estado == null) {
+                    let opciones = ""
+
+                    $.each(response, function(key, item) {
+                        opciones += "<option value='" + item.codigo + "'>" + (item.nombres + " " + item.apellidos) + "</option>"
+                    })
+
+                    $("#cmbAlumno").html(opciones)
+                } else {
+                    alert(response.estado)
+                }
+            }
+        })
+    }
+
+    function guardarNota() {
+        const asignatura = $("#cmbAsignatura").val()
+        const alumno = $("#cmbAlumno").val()
+        const tipoNota = $("#cmbNota").val()
+        const nota = $("#txtNota").val()
+
+        if (nota < 1.0 || nota > 7.0) { // Valida que las notas estén en un rango de 1.0 a 7.0.
+            alert("Nota debe estar dentro del rango permitido de 1.0 a 7.0")
+            return
+        }
+
+        $.ajax({
+            url: "/Home/guardarNota",
+            type: "POST",
+            data: {
+                ASIGNATURA: asignatura,
+                ALUMNO: alumno,
+                TIPONOTA: tipoNota,
+                NOTA: nota
+            },
+            success: function(response) {
+                if (response != "OK") {
+                    alert(response) // Muestra una alerta si no se pudo guardar la nota.
+                } else {
+                    cargarNotas() // Recarga la tabla tras agregar/modificar una nueva nota.
+                }
+
+                $("#txtNota").val("")
+            }
+        })
+    }
+
+    function cargarNotas() {
+        $.ajax({
+            url: "/Home/cargarNotas",
+            type: "GET",
+            success: function(response) {
+                let tabla = ""
+
+                $.each(response, function(key, item) {
+                    tabla += "<tr>"
+                    tabla += "<td>" + item.asignatura + "</td>"
+                    tabla += "<td>" + item.alumno + "</td>"
+                    tabla += "<td>" + item.nota1 + "</td>"
+                    tabla += "<td>" + item.nota2 + "</td>"
+                    tabla += "<td>" + item.nota3 + "</td>"
+                    tabla += "<td>" + item.promedio + "</td>"
+                    tabla += "</tr>"
+                })
+
+                $("#tbDatos").html(tabla)
+            }
+        })
+    }
+</script>
+
+<div class="text-center">
+    <h1>Ingreso de notas</h1>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="cmbAsignatura">Asignatura:</label>
+                
+                <div class="col-1">
+                    <select id="cmbAsignatura"></select>
+                </div>
+            </div> <!-- Combobox Asignaturas -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="cmbAlumno">Alumno:</label>
+
+                <div class="col-1">
+                    <select id="cmbAlumno"></select>
+                </div>
+            </div> <!-- Combobox alumnos-->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="cmbNota">Tipo de nota:</label>
+
+                <div class="col-1">
+                    <select id="cmbNota">
+                        <option id="opNota1" value="1">Nota 1</option>
+                        <option id="opNota2" value="2">Nota 2</option>
+                        <option id="opNota3" value="3">Nota 3</option>
+                    </select>
+                </div>
+            </div> <!-- Combobox tipo de nota -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-5 text-end" for="txtNota">Nota:</label>
+
+                <div class="col-1">
+                    <input type="number" id="txtNota" value=""/>
+                </div>
+            </div> <!-- Textbox nota -->
+
+            <div class="mb-3 align-items-center">
+                <button class="btn btn-primary" onclick="guardarNota()">Registrar nota</button>
+            </div> <!-- Botón para registrar nota3 -->
+        </div>
+    </div>
+
+    <h5 class="text-start">Lista de notas</h5>
+    <table class="table">
+        <thead class="table-primary">
+            <tr>
+                <th>Asignatura</th>
+                <th>Alumno</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th>Nota 3</th>
+                <th>Promedio</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

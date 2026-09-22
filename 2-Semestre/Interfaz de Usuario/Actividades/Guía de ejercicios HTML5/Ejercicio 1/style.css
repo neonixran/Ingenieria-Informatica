@@ -1,0 +1,41 @@
+body {
+    color: rgb(255, 251, 250);
+    font-family: Arial;
+    font-size: 12;
+    font-weight: bold;
+    background-image: url("https://intranet.virginiogomez.cl/e_certificado/img/fondo-vg.jpg");
+}
+
+#logo {
+    width: 396px;
+    height: 91.5px;
+}
+
+section, header {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+label {
+    display: inline-block;
+    width: 120px;
+    text-align: left;
+}
+
+.inline {
+    display: inline;
+}
+
+#btnSend {
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+}

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main class="flex-column text-center">
+    <h1>Convertidor de CLP-USD</h1>
+    <form asp-action="convertirMoneda" method="post">
+
+        <label>CLP: </label>
+        <input type="text" name="clp"/>
+
+        <br /><br />
+
+        <label>USD: </label>
+        <input type="text" name="usd"/>
+
+        <br /><br />
+
+        <input type="submit" value="Convertir"/>
+    </form>
+    <br />
+    <h2>@ViewBag.mensaje</h2>
+</main>

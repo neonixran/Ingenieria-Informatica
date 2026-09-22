@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Camiones";
+}
+
+<script>
+    $(document).ready(function (){
+        cargarPlantas()
+        cargarCamiones()
+    });
+
+    function cargarPlantas() {
+        $.ajax({
+            url: "/Home/cargarPlantas",
+            method: "GET",
+            success: function(response) {
+                let opciones = $("#cmbPlanta").html()
+                
+                $.each(response, function(key, item) {
+                    opciones += "<option value='" + item.id + "'>" + item.nombre + "</option>"
+                })
+                
+                $("#cmbPlanta").html(opciones)
+            }
+        })
+    }
+
+    function registrarCamion() {
+        const codigo = $("#txtCodigo").val()
+        const planta = $("#cmbPlanta").val()
+        const estado = $("#cmbEstado").val()
+
+        if (codigo == "") {
+            alert("Codigo no puede encontrarse vacío")
+            return
+        }
+
+        if (planta == "") {
+            alert("Selecciona una planta")
+            return
+        }
+
+        if (estado == "") {
+            alert("Seleccione un estado")
+            return
+        }
+
+        $.ajax({
+            url: "/Home/registrarCamion",
+            method: "POST",
+            data: {
+                CODIGO: codigo,
+                PLANTA: planta,
+                IDESTADO: estado
+            },
+            success: function(response) {
+                if (response != "OK") {
+                    alert(response);
+                    return;
+                }
+
+                cargarCamiones()
+                limpiar()
+            }
+        })
+    }
+
+    function cargarCamiones() {
+        $.ajax({
+            url: "/Home/cargarCamiones",
+            method: "GET",
+            success: function(response) {
+                var tablaHtml = ""
+
+                $.each(response, function(key, value) {
+                    tablaHtml += "<tr>"
+                    tablaHtml += "<td>" + value.codigo + "</td>"
+                    tablaHtml += "<td>" + value.planta + "</td>"
+
+                    if (value.estado == 1) {
+                        tablaHtml += "<td>Habilitado</td>"
+                        tablaHtml += "<td> <button class='btn btn-sm btn-danger w-100' onclick='cambiarEstado(\"" + value.codigo + "\" ,2)'>Deshabilitar</button> </td>"
+                    } else {
+                        tablaHtml += "<td>Deshabilitado</td>"
+                        tablaHtml += "<td> <button class='btn btn-sm btn-success w-100' onclick='cambiarEstado(\"" + value.codigo + "\" ,1)'>Habilitar</button> </td>"
+                    }
+
+                    tablaHtml += "</tr>"
+                })
+
+                $("#tbCamiones").html(tablaHtml);
+            }
+        })
+    }
+
+    function cambiarEstado(codigo, estado) {
+        if (estado == 2 && !confirm("El camión será deshabilitado")) {
+            return
+        }
+
+        $.ajax({
+            url: "/Home/cambiarEstado",
+            method: "POST",
+            data: {
+                CODIGO: codigo,
+                IDESTADO: estado
+            },
+            success: function(response) {
+                if (response != "OK") {
+                    alert(response);
+                    return;
+                }
+
+                cargarCamiones()
+            }
+        })
+    }
+
+    function limpiar() {
+        $("#txtCodigo").val("")
+        $("#cmbPlanta").val("")
+        $("#cmbEstado").val("")
+    }
+</script>
+
+<div class="text-center">
+    <h2>Registro de camiones</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 mt-4 align-items-center">
+                <label class="form-label col-3 text-end" for="txtCodigo">Código:</label>
+
+                <div class="col-8">
+                    <input class="form-control" type="text" maxlength="10" id="txtCodigo" />
+                </div>
+            </div> <!-- Código -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-3 text-end" for="cmbPlanta">Planta:</label>
+
+                <div class="col-8">
+                    <select class="form-select" name="opciones" id="cmbPlanta">
+                        <option hidden value="">Eliga una opción...</option>
+                    </select>
+                </div>
+            </div> <!-- Planta -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="form-label col-3 text-end" for="cmbEstado">Estado:</label>
+
+                <div class="col-8">
+                    <select class="form-select" name="opciones" id="cmbEstado">
+                        <option hidden value="">Eliga una opción...</option>
+                        <option value="1">Habilitado</option>
+                        <option value="2">Deshabilitado</option>
+                    </select>
+                </div>
+            </div> <!-- Estado -->
+
+            <button class="btn btn-primary mb-5" onclick="registrarCamion()">Registrar camión</button> <!-- Botón para registrar -->
+        </div>
+
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Código camión</th>
+                    <th scope="col">Planta</th>
+                    <th scope="col">Estado</th>
+                    <th style="width: 120px" scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tbCamiones">
+            </tbody>
+        </table> <!-- Tabla de camiones -->
+    </div>
+</div>

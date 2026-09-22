@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/pryCertamen3.styles.css" asp-append-version="true" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 visually-hidden">
+            <div class="container-fluid">
+                <span class="navbar-brand text-muted me-5"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Usuarios">Usuarios</a>
+                        </li> <!-- Botón página Usuarios -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Chofer">Chofer</a>
+                        </li> <!-- Botón página Chofer -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Camión">Camión</a>
+                        </li><!-- Botón página Camión -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Salida">Salida</a>
+                        </li> <!-- Botón página Salida -->
+                    </ul>
+
+                    <button class="btn btn-sm btn-primary ms-auto" onclick="cerrarSesion()">Cerrar sesión</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - Certamen 3 | Josué Bravo, Kevin Monroy y Marcos Romero
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function (){
+            $.ajax({
+                url: "/Home/obtenerSesion",
+                method: "GET",
+                success: function(response) {
+                    if (response != null) {
+                        $(".navbar").removeClass("visually-hidden")
+                        $(".navbar-brand").text("Bienvenido, " + response)
+                    }
+                }
+            })
+        });
+
+        function cerrarSesion() {
+            if (confirm("¿Seguro que quiere cerrar sesión?")) {
+                $.ajax({
+                    url: "/Home/cerrarSesion",
+                    method: "GET",
+                    success: function(response) {
+                        if (response == "OK") {
+                            $(".navbar").addClass("visually-hidden")
+                            $(".navbar-brand").addClass("visually-hidden")
+
+                            window.location.href = "/Home/InicioSesion"
+                        } else {
+                            alert(response)
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<main class="flex-column text-center">
+    <h1>Cuota Crédito Hipotecario</h1>
+    <form asp-action="calcularCuota" method="post">
+
+        <label>Valor cuota (UF): </label>
+        <input type="text" name="cuota" />
+
+        <br /><br />
+
+        <input type="submit" value="Calcular" />
+    </form>
+    <br />
+    <h2>@ViewBag.mensaje</h2>
+</main>

@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script>
+    $(document).ready(recarga())
+
+    function recarga() {
+        $.ajax({
+            method:"POST",
+            url: "/Home/recargaDatos",
+            success: function(res) {
+                var tabla = "";
+
+                $.each(res, function(pos, val) {
+                    console.log(pos, val)
+                    tabla += "<tr>";
+                    tabla += "<td>" + val.dato1 + "</td>";
+                    tabla += "<td>" + val.dato2 + "</td>";
+                    tabla += "<td>" + val.dato1 + "</td>";
+                    tabla += "<td><td>"
+                    tabla += "</tr>";
+                })
+
+                $("#tblResultados tbody").remove();
+                $("#tblResultados").append(tabla);
+            }
+        });
+    }
+
+    function enviar() {
+        var dato = $("#txtDato").val();
+
+        $.ajax({
+            data: {
+                DATO: dato,
+                DATO2: 5
+            },
+            async: false,
+            method: "POST",
+            url: "/Home/validaDatos",
+            success: function(res) {
+                var tabla = "";
+
+                $.each(res, function(pos, val) {
+                    console.log(pos, val)
+                    tabla += "<tr>";
+                    tabla += "<td>" + val.dato1 + "</td>";
+                    tabla += "<td>" + val.dato2 + "</td>";
+                    tabla += "<td>" + val.dato1 + "</td>";
+                    tabla += "<td><td>"
+                    tabla += "</tr>";
+                })
+
+                $("#tblResultados tbody").remove();
+                $("#tblResultados").append(tabla);
+            },
+            error: function(xhr, status, error) {
+
+            }
+        })
+    }
+    function valida(){
+        var dato = $("#txtDato").val();
+        console.log("llega a consola");
+        if(dato == ""){
+            alert("Texto no puede estar vacio");
+        }else{
+            switch(dato) {
+                case "A":
+                    alert("AJAX");
+                    break;
+                case "J":
+                    alert("JAVA")
+                    break;
+                default:
+                    alert(dato)
+                    break
+            }
+        }
+    }
+
+    function calcular(){
+        var n1 = $("#txtn1").val()
+        var n2 = $("#txtn2").val()
+
+        if (n1 == "" || n2 == "") {
+            alert("Ambos números deben ser ingresados");
+            return;
+        }
+
+        var resultado = parseInt(n1) + parseInt(n2);
+
+        var datoHtml = "<tr>" // Inicio
+        datoHtml += "<td style='color: green'>" + n1 + "</td>";
+        datoHtml += "<td style='color: blue'>" + n2 + "</td>";
+        datoHtml += "<td style='background: linear-gradient(to bottom, cyan, blue); background-clip: text; color: transparent; font-weight: bold'>" + resultado + "</td>";
+        datoHtml += "</tr>"; // Fin
+
+        $("#tblResultados tbody").remove();
+        $("#tblResultados").append(datoHtml);
+    }
+</script>
+
+<select id="cmbOpciones">
+    <option value="1">Concepción</option>
+    <option value="2">Valparaiso</option>
+    <option value="3">Santiago</option>
+</select>
+<br /><br />
+<input type="text" id="txtDato" />
+<br />
+<button onclick="enviar()">Validar</button>
+
+<br /><br />
+<input type="number" id="txtn1" />
+<br /><br />
+<input type="number" id="txtn2" />
+<br /><br />
+<button onclick="calcular()" >Calcular</button>
+<br /><br />
+<table id="tblResultados">
+    <thead>
+        <tr style="background-color:red; color:white">
+            <th>Dato 1</th>
+            <th>Dato 2</th>
+            <th>Resultado</th>
+        </tr>
+    </thead>
+</table>

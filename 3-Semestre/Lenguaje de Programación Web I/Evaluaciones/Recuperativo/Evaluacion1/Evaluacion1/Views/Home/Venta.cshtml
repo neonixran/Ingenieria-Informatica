@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Venta";
+}
+
+<h1>Venta</h1>
+<br />
+<form asp-action="IngresoVenta" method="post">
+    <div style="width: 50%;margin: 0 auto;">
+        <table>
+            <tr>
+                <td style="width:40%"><label>Código producto</label></td>
+                <td><input type="number" name="txtCodigo" /></td>
+            </tr>
+            <tr>
+                <td style="width:40%"><label>Cantidad </label></td>
+                <td><input type="number" name="txtCantidad" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right"><input type="submit" value="Vender" /></td>
+            </tr>
+        </table>
+    </div>
+</form>
+<br />
+<div style="width: 100%;margin: 0 auto;">
+    <table border="1" width="100%">
+        <tr>
+            <td style="background:red; color:white; width:10%">ID VENTA</td>
+            <td style="background:red; color:white; width:20%">CÓDIGO PRODUCTO</td>
+            <td style="background:red; color:white; width:30%">NOMBRE PRODUCTO</td>
+            <td style="background:red; color:white; width:20%">CANTIDAD VENDIDA</td>
+            <td style="background:red; color:white; width:10%">TOTAL VENTA</td>
+            <td style="background:red; color:white; width:10%">FECHA VENTA</td>
+        </tr>
+        <tr>
+            @{
+                if (ViewBag.listadoVentas != null)
+                {
+                    foreach (var venta in ViewBag.listadoVentas)
+                    {
+                        <tr>
+                            <td>@venta.id</td>
+                            <td>@venta.codigoProd</td>
+                            <td>@venta.nombreProd</td>
+                            <td>@venta.cantidad</td>
+                            <td>@venta.total</td>
+                            <td>@venta.fecha</td>
+                        </tr>
+                    }
+                }
+            }
+        </tr>
+    </table>
+</div>

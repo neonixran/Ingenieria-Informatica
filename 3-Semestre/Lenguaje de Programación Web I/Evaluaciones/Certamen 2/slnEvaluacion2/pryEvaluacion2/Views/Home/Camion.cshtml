@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Camión";
+}
+
+<script>
+    $(document).ready(function (){
+        cargarDatos()
+    });
+
+    function guardarCamion() {
+        var patente = $("#txtPatente").val();
+        var tipoCamion = $("#cmbTipos").val();
+
+        if (patente == "") {
+            alert("Debe ingresar la patente del camión.")
+            return
+        }
+
+        if (patente.length != 6) {
+            alert("La patente ingresada debe tener una longitud de 6.")
+            return
+        }
+
+        $.ajax({
+            url: "../Home/guardarCamion",
+            method: "POST",
+            data: {
+                Patente: patente,
+                tipoCamion: tipoCamion
+            }, // Estos datos se van a la función C# "guardarCamion".
+            success: function(response){
+                if (!response) { // La función retorna un booleano, que indica si el camión ya existe o no.
+                    alert("Ya hay un camión con la patente ingresada.")
+                    return
+                }
+
+                cargarDatos();
+                limpiar();
+
+                alert("Camión ingresado con exito")
+            }
+        })
+    }
+
+    function cargarDatos() { // Función para cargar la grilla de datos de los conductores.
+        $.ajax({
+            url: "../Home/cargarCamiones",
+            method: "POST",
+            success: function(response) {
+                var tablaHtml = ""
+                $.each(response, function(key, value) {
+                    tablaHtml += "<tr>"
+                        tablaHtml += "<td>" + value.patente + "</td>"
+                        tablaHtml += "<td>" + value.tipoCamion + "</td>"
+                    tablaHtml += "</tr>"
+                });
+
+                $("#tbDatos").html(tablaHtml);
+            }
+        })
+    }
+
+    function limpiar() {
+        $("#txtPatente").val("");
+    }
+</script>
+
+<div class="text-center">
+    <h2>Camiones</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="txtPatente">Patente:</label>
+                
+                <div class="col-7">
+                    <input class="form-control" type="text" maxlength="6" id="txtPatente" />
+                </div>
+            </div> <!-- Patente del camión -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="cmbTipos">Tipo de camión:</label>
+                
+                <div class="col-7">
+                    <select class="form-select" name="opciones" id="cmbTipos">
+                        <option value="Pequeño">Pequeño</option>
+                        <option value="Mediano">Mediano</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                </div>
+            </div> <!-- Tipo de camión -->
+        </div>
+    </div>
+
+    <button class="btn btn-primary mb-3" onclick="guardarCamion()">Ingresar camión</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Patente</th>
+                <th scope="col">Tipo de camión</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    $(document).ready(function (){
+        cargarDatos()
+    });
+
+    function guardarConductor() { // Función para guardar al conductor
+        var nombre = $("#txtNombre").val();
+        var id = $("#txtID").val();
+        var tipoCamion = $("#cmbTipos").val();
+
+        if (nombre == "") {
+            alert("Debe ingresar el nombre del conductor.")
+            return
+        }
+
+        if (id == "") {
+            alert("Debe ingresar el id del conductor.")
+            return
+        }
+
+        $.ajax({
+            url: "../Home/guardarConductor",
+            method: "POST",
+            data: {
+                Nombre: nombre,
+                Id: id,
+                tipoCamion: tipoCamion
+            }, // Estos datos se van a la función C# "guardarConductor".
+            success: function(response){
+                if (!response) { // La función retorna un booleano, que indica si el conductor ya existe o no.
+                    alert("Ya hay un conductor la id ingresada.")
+                    return
+                }
+
+                cargarDatos();
+                limpiar();
+
+                alert("Conductor ingresado con exito")
+            }
+        })
+    }
+
+    function cargarDatos() { // Función para cargar la grilla de datos de los conductores.
+        $.ajax({
+            url: "../Home/cargarConductores",
+            method: "POST",
+            success: function(response) {
+                var tablaHtml = ""
+                $.each(response, function(key, value) {
+                    tablaHtml += "<tr>"
+                        tablaHtml += "<td>" + value.id + "</td>"
+                        tablaHtml += "<td>" + value.nombre + "</td>"
+                        tablaHtml += "<td>" + value.tipoCamion + "</td>"
+                    tablaHtml += "</tr>"
+                });
+
+                $("#tbDatos").html(tablaHtml);
+            }
+        })
+    }
+
+    function limpiar() {
+        $("#txtNombre").val("");
+        $("#txtID").val("");
+    }
+</script>
+
+<div class="text-center">
+    <h2>Conductores</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="txtNombre">Nombre:</label>
+
+                <div class="col-7">
+                    <input class="form-control" type="text" name="nombre" id="txtNombre" />
+                </div>
+            </div> <!-- Nombre del conductor -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="txtID">ID:</label>
+
+                <div class="col-7">
+                    <input class="form-control" type="number" name="id" id="txtID" />
+                </div>
+            </div> <!-- Id del conductor -->
+
+            <div class="row mb-3 align-items-center">
+                <label class="col-3 text-end" for="cmbTipos">Tipo de camión:</label>
+            
+                <div class="col-7">
+                    <select class="form-select" name="tipos" id="cmbTipos">
+                        <option value="Pequeño">Pequeño</option>
+                        <option value="Mediano">Mediano</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                </div>
+            </div> <!-- Tipos de camión -->
+        </div>
+    </div>
+
+    <button class="btn btn-primary mb-4" onclick="guardarConductor()">Ingresar conductor</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre persona</th>
+                <th scope="col">Tipo de camión</th>
+            </tr>
+        </thead>
+        <tbody id="tbDatos">
+        </tbody>
+    </table>
+</div>

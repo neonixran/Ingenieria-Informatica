@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+<script>
+    function ingresar(){
+        var usuario = $("#txtUsuario").val();
+        var contraseña = $("#txtContraseña").val();
+       
+        if(usuario == ""){
+            alert("Debe ingresar el usuario");
+        }else if (contraseña == ""){
+            alert("Debe ingresar la contraseña");
+        }else{
+            $.ajax({
+                url: "/Home/ingresar",
+                method: "POST",
+                data: {USR: usuario, PASS:contraseña},
+                success: function(response){
+                    if(response != "OK"){
+                        alert(response);
+                    }else{
+                        window.location.href = "/Home/Registrar";
+                    }
+                }
+            });
+        }
+    }
+</script>
+<br />
+<div style="width: 50%;margin: 0 auto;">
+    <table>
+        <tr>
+            <td style="width:40%"><label>Usuario</label></td>
+            <td><input type="text" id="txtUsuario" name="txtUsuario" /></td>
+        </tr>
+        <tr>
+            <td style="width:40%"><label>Contraseña</label></td>
+            <td><input type="password" id="txtContraseña" name="txtContraseña" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button onclick="ingresar()">Ingresar</button></td>
+        </tr>
+    </table>
+</div>
