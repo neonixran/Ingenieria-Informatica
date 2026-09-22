@@ -1,24 +1,86 @@
-# Visual Studio / .NET
+# --- Sistema Operativo ---
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.stackdump
+*.lnk
+
+# --- Visual Studio / .NET / C# / ASP.NET ---
 .vs/
-bin/
-obj/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.pdb
+*.cache
+*.log
+*.ilk
+*.aps
+*.ncb
+*.opendb
+*.sdf
+*.VC.db
+project.lock.json
+artifacts/
+PublishScripts/
+*.nupkg
+**/packages/*
+!**/packages/build/
 
-# Java / NetBeans
+# --- JetBrains (IntelliJ, Rider, Android Studio) ---
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+cmake-build-*/
+
+# --- Android Studio / Kotlin ---
+.gradle/
+.cxx/
+local.properties
+captures/
+.externalNativeBuild/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.jks
+*.keystore
+
+# --- NetBeans / Java ---
 **/nbproject/private/
 **/build/
 **/dist/
-/3º Semestre/Lenguaje de Programación O.O I/Prácticos/pryTicket20149/build
-
-# NetBeans — archivos compilados
 **/*.class
 **/*.jar
-**/build/
-**/dist/
 **/.netbeans_automatic_build
 **/.netbeans_update_resources
-**/nbproject/private/
+.nb-gradle/
 
-# Archivos de prueba sueltos
-a.py
+# --- Visual Studio Code ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+.ionide/
+*.vsix
+
+# --- ReSharper y Herramientas Add-in ---
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.ncrunch/
+_NCrunch_*
