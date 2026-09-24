@@ -28,25 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             grpDatosCliente = new GroupBox();
-            grpEspecificaciones = new GroupBox();
-            lblNombrePyme = new Label();
-            txtNombrePyme = new TextBox();
-            lblNombrePyme = new Label();
+            txtPyme = new TextBox();
+            lblPyme = new Label();
             cboComuna = new ComboBox();
             lblComuna = new Label();
             grpEspecificaciones = new GroupBox();
-            lblCantidadPaneles = new Label();
-            txtCantidadPaneles = new TextBox();
-            chkDescuentoFomento = new CheckBox();
-            lblPrecioPanel = new Label();
-            txtPrecioPanel = new TextBox();
-            btnLimpiarFormulario = new Button();
-            btnCalcularCotizacion = new Button();
+            lblPresupuesto = new Label();
+            txtPresupuesto = new TextBox();
+            lblInversor = new Label();
+            txtInversor = new TextBox();
+            lblPaneles = new Label();
+            txtPaneles = new TextBox();
+            chkFomento = new CheckBox();
+            lblTarifaPanel = new Label();
+            txtTarifaPanel = new TextBox();
+            btnLimpiar = new Button();
+            btnCalcular = new Button();
             grpResultados = new GroupBox();
             lblTotalNeto = new Label();
             lblIva = new Label();
             lblSubtotal = new Label();
+            btnSalir = new Button();
+            toolTip1 = new ToolTip(components);
             grpDatosCliente.SuspendLayout();
             grpEspecificaciones.SuspendLayout();
             grpResultados.SuspendLayout();
@@ -54,134 +59,183 @@
             // 
             // grpDatosCliente
             // 
-            grpDatosCliente.Controls.Add(txtNombrePyme);
-            grpDatosCliente.Controls.Add(lblNombrePyme);
+            grpDatosCliente.Controls.Add(txtPyme);
+            grpDatosCliente.Controls.Add(lblPyme);
             grpDatosCliente.Controls.Add(cboComuna);
             grpDatosCliente.Controls.Add(lblComuna);
             grpDatosCliente.Location = new Point(12, 12);
             grpDatosCliente.Name = "grpDatosCliente";
-            grpDatosCliente.Size = new Size(350, 174);
+            grpDatosCliente.Size = new Size(350, 171);
             grpDatosCliente.TabIndex = 0;
             grpDatosCliente.TabStop = false;
             grpDatosCliente.Text = "Datos de la PYME Cliente";
             // 
-            // txtNombrePyme
+            // txtPyme
             // 
-            txtNombrePyme.Location = new Point(20, 48);
-            txtNombrePyme.Name = "txtNombrePyme";
-            txtNombrePyme.Size = new Size(157, 23);
-            txtNombrePyme.TabIndex = 1;
+            txtPyme.Location = new Point(20, 48);
+            txtPyme.Name = "txtPyme";
+            txtPyme.PlaceholderText = "Ej: Agrícola El Roble Ltda.";
+            txtPyme.Size = new Size(157, 23);
+            txtPyme.TabIndex = 0;
             // 
-            // lblNombrePyme
+            // lblPyme
             // 
-            lblNombrePyme.AutoSize = true;
-            lblNombrePyme.Location = new Point(20, 30);
-            lblNombrePyme.Name = "lblNombrePyme";
-            lblNombrePyme.Size = new Size(84, 15);
-            lblNombrePyme.TabIndex = 0;
-            lblNombrePyme.Text = "Nombre Pyme";
+            lblPyme.AutoSize = true;
+            lblPyme.Location = new Point(20, 30);
+            lblPyme.Name = "lblPyme";
+            lblPyme.Size = new Size(112, 15);
+            lblPyme.TabIndex = 0;
+            lblPyme.Text = "Nombre de la Pyme";
             // 
             // cboComuna
             // 
+            cboComuna.DropDownStyle = ComboBoxStyle.DropDownList;
             cboComuna.FormattingEnabled = true;
             cboComuna.Location = new Point(20, 103);
             cboComuna.Name = "cboComuna";
             cboComuna.Size = new Size(157, 23);
-            cboComuna.TabIndex = 7;
+            cboComuna.TabIndex = 1;
             // 
             // lblComuna
             // 
             lblComuna.AutoSize = true;
             lblComuna.Location = new Point(20, 85);
             lblComuna.Name = "lblComuna";
-            lblComuna.Size = new Size(53, 15);
+            lblComuna.Size = new Size(160, 15);
             lblComuna.TabIndex = 6;
-            lblComuna.Text = "Comuna";
+            lblComuna.Text = "Comuna (Región del Biobío):";
             // 
             // grpEspecificaciones
             // 
-            grpEspecificaciones.Controls.Add(lblCantidadPaneles);
-            grpEspecificaciones.Controls.Add(txtCantidadPaneles);
-            grpEspecificaciones.Controls.Add(chkDescuentoFomento);
-            grpEspecificaciones.Controls.Add(lblPrecioPanel);
-            grpEspecificaciones.Controls.Add(txtPrecioPanel);
+            grpEspecificaciones.Controls.Add(lblPresupuesto);
+            grpEspecificaciones.Controls.Add(txtPresupuesto);
+            grpEspecificaciones.Controls.Add(lblInversor);
+            grpEspecificaciones.Controls.Add(txtInversor);
+            grpEspecificaciones.Controls.Add(lblPaneles);
+            grpEspecificaciones.Controls.Add(txtPaneles);
+            grpEspecificaciones.Controls.Add(chkFomento);
+            grpEspecificaciones.Controls.Add(lblTarifaPanel);
+            grpEspecificaciones.Controls.Add(txtTarifaPanel);
             grpEspecificaciones.Location = new Point(368, 12);
             grpEspecificaciones.Name = "grpEspecificaciones";
-            grpEspecificaciones.Size = new Size(350, 174);
+            grpEspecificaciones.Size = new Size(379, 171);
             grpEspecificaciones.TabIndex = 1;
             grpEspecificaciones.TabStop = false;
             grpEspecificaciones.Text = "Dimensionamiento Técnico";
             // 
-            // lblCantidadPaneles
+            // lblPresupuesto
             // 
-            lblCantidadPaneles.AutoSize = true;
-            lblCantidadPaneles.Location = new Point(20, 30);
-            lblCantidadPaneles.Name = "lblCantidadPaneles";
-            lblCantidadPaneles.Size = new Size(114, 15);
-            lblCantidadPaneles.TabIndex = 2;
-            lblCantidadPaneles.Text = "Cantidad de Paneles";
+            lblPresupuesto.AutoSize = true;
+            lblPresupuesto.Location = new Point(203, 85);
+            lblPresupuesto.Name = "lblPresupuesto";
+            lblPresupuesto.Size = new Size(72, 15);
+            lblPresupuesto.TabIndex = 11;
+            lblPresupuesto.Text = "Presupuesto";
             // 
-            // txtCantidadPaneles
+            // txtPresupuesto
             // 
-            txtCantidadPaneles.Location = new Point(20, 48);
-            txtCantidadPaneles.Name = "txtCantidadPaneles";
-            txtCantidadPaneles.Size = new Size(157, 23);
-            txtCantidadPaneles.TabIndex = 3;
+            txtPresupuesto.Location = new Point(203, 103);
+            txtPresupuesto.Name = "txtPresupuesto";
+            txtPresupuesto.PlaceholderText = "500.0 - 100000.0 USD";
+            txtPresupuesto.Size = new Size(157, 23);
+            txtPresupuesto.TabIndex = 6;
             // 
-            // chkDescuentoFomento
+            // lblInversor
             // 
-            chkDescuentoFomento.AutoSize = true;
-            chkDescuentoFomento.Font = new Font("Segoe UI", 8F);
-            chkDescuentoFomento.Location = new Point(20, 138);
-            chkDescuentoFomento.Name = "chkDescuentoFomento";
-            chkDescuentoFomento.Size = new Size(299, 17);
-            chkDescuentoFomento.TabIndex = 8;
-            chkDescuentoFomento.Text = "Aplicar Descuento Estatal por Generación Distribuida";
-            chkDescuentoFomento.UseVisualStyleBackColor = true;
+            lblInversor.AutoSize = true;
+            lblInversor.Location = new Point(20, 85);
+            lblInversor.Name = "lblInversor";
+            lblInversor.Size = new Size(83, 15);
+            lblInversor.TabIndex = 9;
+            lblInversor.Text = "Costo inversor";
             // 
-            // lblPrecioPanel
+            // txtInversor
             // 
-            lblPrecioPanel.AutoSize = true;
-            lblPrecioPanel.Location = new Point(20, 80);
-            lblPrecioPanel.Name = "lblPrecioPanel";
-            lblPrecioPanel.Size = new Size(93, 15);
-            lblPrecioPanel.TabIndex = 4;
-            lblPrecioPanel.Text = "Precio por Panel";
+            txtInversor.Location = new Point(20, 103);
+            txtInversor.Name = "txtInversor";
+            txtInversor.PlaceholderText = "100.0 - 10000.0 USD";
+            txtInversor.Size = new Size(157, 23);
+            txtInversor.TabIndex = 4;
             // 
-            // txtPrecioPanel
+            // lblPaneles
             // 
-            txtPrecioPanel.Location = new Point(20, 98);
-            txtPrecioPanel.Name = "txtPrecioPanel";
-            txtPrecioPanel.Size = new Size(157, 23);
-            txtPrecioPanel.TabIndex = 5;
+            lblPaneles.AutoSize = true;
+            lblPaneles.Location = new Point(20, 30);
+            lblPaneles.Name = "lblPaneles";
+            lblPaneles.Size = new Size(114, 15);
+            lblPaneles.TabIndex = 2;
+            lblPaneles.Text = "Cantidad de Paneles";
             // 
-            // btnLimpiarFormulario
+            // txtPaneles
             // 
-            btnLimpiarFormulario.Location = new Point(388, 192);
-            btnLimpiarFormulario.Name = "btnLimpiarFormulario";
-            btnLimpiarFormulario.Size = new Size(125, 23);
-            btnLimpiarFormulario.TabIndex = 9;
-            btnLimpiarFormulario.Text = "Limpiar Formulario";
-            btnLimpiarFormulario.UseVisualStyleBackColor = true;
-            btnLimpiarFormulario.Click += btnLimpiar_Click;
+            txtPaneles.Location = new Point(20, 48);
+            txtPaneles.Name = "txtPaneles";
+            txtPaneles.PlaceholderText = "1 - 200";
+            txtPaneles.Size = new Size(157, 23);
+            txtPaneles.TabIndex = 2;
             // 
-            // btnCalcularCotizacion
+            // chkFomento
             // 
-            btnCalcularCotizacion.Location = new Point(219, 192);
-            btnCalcularCotizacion.Name = "btnCalcularCotizacion";
-            btnCalcularCotizacion.Size = new Size(125, 23);
-            btnCalcularCotizacion.TabIndex = 10;
-            btnCalcularCotizacion.Text = "Calcular Cotización";
-            btnCalcularCotizacion.UseVisualStyleBackColor = true;
+            chkFomento.AutoSize = true;
+            chkFomento.Font = new Font("Segoe UI", 8F);
+            chkFomento.Location = new Point(18, 142);
+            chkFomento.Name = "chkFomento";
+            chkFomento.Size = new Size(355, 17);
+            chkFomento.TabIndex = 5;
+            chkFomento.Text = "Aplicar subsidio estatal de fomento (Ley Generación Distribuida)";
+            toolTip1.SetToolTip(chkFomento, "Aplica un 10% de descuento directo sobre el total neto según la Ley 20.571");
+            chkFomento.UseVisualStyleBackColor = true;
+            // 
+            // lblTarifaPanel
+            // 
+            lblTarifaPanel.AutoSize = true;
+            lblTarifaPanel.Location = new Point(203, 30);
+            lblTarifaPanel.Name = "lblTarifaPanel";
+            lblTarifaPanel.Size = new Size(93, 15);
+            lblTarifaPanel.TabIndex = 4;
+            lblTarifaPanel.Text = "Precio por Panel";
+            // 
+            // txtTarifaPanel
+            // 
+            txtTarifaPanel.Location = new Point(203, 48);
+            txtTarifaPanel.Name = "txtTarifaPanel";
+            txtTarifaPanel.PlaceholderText = "50.0 - 1500.0 USD";
+            txtTarifaPanel.Size = new Size(157, 23);
+            txtTarifaPanel.TabIndex = 3;
+            // 
+            // btnLimpiar
+            // 
+            btnLimpiar.BackColor = Color.FromArgb(100, 116, 139);
+            btnLimpiar.ForeColor = Color.White;
+            btnLimpiar.Location = new Point(340, 196);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(135, 23);
+            btnLimpiar.TabIndex = 8;
+            btnLimpiar.Text = "\U0001f9f9 Limpiar Formulario";
+            btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
+            // btnCalcular
+            // 
+            btnCalcular.BackColor = Color.FromArgb(0, 47, 108);
+            btnCalcular.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCalcular.ForeColor = Color.White;
+            btnCalcular.Location = new Point(116, 189);
+            btnCalcular.Name = "btnCalcular";
+            btnCalcular.Size = new Size(191, 34);
+            btnCalcular.TabIndex = 7;
+            btnCalcular.Text = "\U0001f9ee Calcular Cotización";
+            btnCalcular.UseVisualStyleBackColor = false;
             // 
             // grpResultados
             // 
             grpResultados.Controls.Add(lblTotalNeto);
             grpResultados.Controls.Add(lblIva);
             grpResultados.Controls.Add(lblSubtotal);
-            grpResultados.Location = new Point(16, 221);
+            grpResultados.Enabled = false;
+            grpResultados.Location = new Point(16, 229);
             grpResultados.Name = "grpResultados";
-            grpResultados.Size = new Size(702, 140);
+            grpResultados.Size = new Size(731, 132);
             grpResultados.TabIndex = 2;
             grpResultados.TabStop = false;
             grpResultados.Text = "Resultados";
@@ -213,13 +267,29 @@
             lblSubtotal.TabIndex = 0;
             lblSubtotal.Text = "Subtotal: $0.00 USD";
             // 
+            // btnSalir
+            // 
+            btnSalir.BackColor = Color.FromArgb(220, 38, 38);
+            btnSalir.ForeColor = Color.White;
+            btnSalir.Location = new Point(508, 196);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(135, 23);
+            btnSalir.TabIndex = 9;
+            btnSalir.Text = "❌ Salir";
+            btnSalir.UseVisualStyleBackColor = false;
+            // 
+            // toolTip1
+            // 
+            toolTip1.IsBalloon = true;
+            // 
             // FormCotizador
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(734, 373);
-            Controls.Add(btnLimpiarFormulario);
-            Controls.Add(btnCalcularCotizacion);
+            ClientSize = new Size(759, 373);
+            Controls.Add(btnSalir);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnCalcular);
             Controls.Add(grpResultados);
             Controls.Add(grpEspecificaciones);
             Controls.Add(grpDatosCliente);
@@ -227,6 +297,7 @@
             Name = "FormCotizador";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistema de Cotización Solar - IPVG 2026";
+            Load += FormCotizador_Load;
             grpDatosCliente.ResumeLayout(false);
             grpDatosCliente.PerformLayout();
             grpEspecificaciones.ResumeLayout(false);
@@ -240,20 +311,26 @@
 
         private GroupBox grpDatosCliente;
         private GroupBox grpEspecificaciones;
-        private TextBox txtPrecioPanel;
-        private Label lblPrecioPanel;
-        private TextBox txtCantidadPaneles;
-        private Label lblCantidadPaneles;
-        private TextBox txtNombrePyme;
-        private Label lblNombrePyme;
+        private TextBox txtTarifaPanel;
+        private Label lblTarifaPanel;
+        private TextBox txtPaneles;
+        private Label lblPaneles;
+        private TextBox txtPyme;
+        private Label lblPyme;
         private ComboBox cboComuna;
         private Label lblComuna;
-        private CheckBox chkDescuentoFomento;
-        private Button btnCalcularCotizacion;
-        private Button btnLimpiarFormulario;
+        private CheckBox chkFomento;
+        private Button btnCalcular;
+        private Button btnLimpiar;
         private GroupBox grpResultados;
         private Label lblTotalNeto;
         private Label lblIva;
         private Label lblSubtotal;
+        private Label lblInversor;
+        private TextBox txtInversor;
+        private Label lblPresupuesto;
+        private TextBox txtPresupuesto;
+        private Button btnSalir;
+        private ToolTip toolTip1;
     }
 }
