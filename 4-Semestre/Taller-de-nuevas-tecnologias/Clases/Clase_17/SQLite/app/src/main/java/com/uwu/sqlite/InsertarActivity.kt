@@ -6,12 +6,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class InsertarActivity : AppCompatActivity() {
-    lateinit var personasDBHelper: miSQLiteHelper
+    lateinit var personasDBHelper: SQLiteHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,7 @@ class InsertarActivity : AppCompatActivity() {
             insets
         }
 
-        personasDBHelper = miSQLiteHelper(this)
+        personasDBHelper = SQLiteHelper(this)
 
         val botonVolver = findViewById<Button>(R.id.btnInsertarVolver)
 
@@ -34,8 +35,7 @@ class InsertarActivity : AppCompatActivity() {
         val botonGuardar = findViewById<Button>(R.id.btnGuardar)
 
         botonVolver.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
+            startActivity(Intent(this, ConsultarActivity::class.java))
         }
 
         botonGuardar.setOnClickListener {
@@ -43,29 +43,38 @@ class InsertarActivity : AppCompatActivity() {
             val apellidos = textoApellidos.text.toString()
             val edad = textoEdad.text.toString()
 
-            var mensaje : String
+            val tituloMensaje = "Para poder agregar una persona, debe ingresar: \n"
+            var mensaje = tituloMensaje
 
             if (nombres.isEmpty()) {
-                mensaje = "Debe ingresar sus nombres"
-            } else if (apellidos.isEmpty()) {
-                mensaje = "Debe ingresar sus apellidos"
-            } else if (edad.isEmpty()) {
-                mensaje = "Debe ingresar la edad"
-            } else {
-                personasDBHelper.anyadirDato(
-                    textoNombres.text.toString(),
-                    textoApellidos.text.toString(),
-                    textoEdad.text.toString().toInt()
-                )
-
-                mensaje = "Guardado correctamente"
+                mensaje += "- Sus nombres\n"
             }
 
-            Toast.makeText(
-                this,
-                mensaje,
-                Toast.LENGTH_SHORT
-            ).show()
+            if (apellidos.isEmpty()) {
+                mensaje += "- Sus apellidos\n"
+            }
+
+            if (edad.isEmpty()) {
+                mensaje += "- Su edad"
+            }
+
+            if (!mensaje.matches(Regex(tituloMensaje))) {
+                AlertDialog.Builder(this)
+                    .setMessage(mensaje)
+                    .setPositiveButton("Ok") { dialog, id ->
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
+            } else {
+                personasDBHelper.anadirRegistro(nombres, apellidos, edad.toInt())
+
+                textoNombres.text.clear()
+                textoApellidos.text.clear()
+                textoEdad.text.clear()
+
+                Toast.makeText(this, "Agregado exitosamente", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

@@ -7,6 +7,75 @@
     android:layout_height="match_parent"
     tools:context=".EditarActivity">
 
+    <EditText
+        android:id="@+id/txtEditarEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="90dp"
+        android:ems="10"
+        android:enabled="true"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarApellidos" />
+
+    <TextView
+        android:id="@+id/lblEditarEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="5dp"
+        android:text="Edad:"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtEditarEdad"
+        app:layout_constraintTop_toBottomOf="@+id/lblEditarApellidos" />
+
+    <EditText
+        android:id="@+id/txtEditarApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="90dp"
+        android:ems="10"
+        android:enabled="true"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarNombres" />
+
+    <TextView
+        android:id="@+id/lblEditarApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="5dp"
+        android:text="Apellidos:"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtEditarApellidos"
+        app:layout_constraintTop_toBottomOf="@+id/lblEditarNombres" />
+
+    <EditText
+        android:id="@+id/txtEditarNombres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="90dp"
+        android:ems="10"
+        android:enabled="true"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarId" />
+
+    <TextView
+        android:id="@+id/lblEditarNombres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="5dp"
+        android:text="Nombres:"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtEditarNombres"
+        app:layout_constraintTop_toBottomOf="@+id/lblEditarId" />
+
     <Button
         android:id="@+id/btnEditarVolver"
         android:layout_width="wrap_content"
@@ -27,4 +96,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblEditarId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="165dp"
+        android:layout_marginEnd="5dp"
+        android:text="ID:"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtEditarId"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnEditarEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="36dp"
+        android:text="Eliminar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarEdad" />
+
+    <Button
+        android:id="@+id/btnEditarLimpiar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
+        android:text="Limpiar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarEdad" />
+
+    <Button
+        android:id="@+id/btnEditar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="Editar"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditarEliminar"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toEndOf="@+id/btnEditarLimpiar"
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarEdad" />
+
+    <EditText
+        android:id="@+id/txtEditarId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="90dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEditarTitulo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

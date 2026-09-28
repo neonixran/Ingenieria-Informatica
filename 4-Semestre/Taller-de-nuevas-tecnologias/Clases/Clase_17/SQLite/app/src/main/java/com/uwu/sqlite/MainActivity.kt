@@ -19,16 +19,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val botonInsertar = findViewById<Button>(R.id.btnInsertar)
-        val botonEditar = findViewById<Button>(R.id.btnEditar)
-        val botonConsultar = findViewById<Button>(R.id.btnConsultar)
+        val botonInsertar = findViewById<Button>(R.id.btnMenuInsertar)
+        val botonConsultar = findViewById<Button>(R.id.btnMenuConsultar)
 
         botonInsertar.setOnClickListener {
             startActivity(Intent(this, InsertarActivity::class.java))
-        }
-
-        botonEditar.setOnClickListener {
-            startActivity(Intent(this, EditarActivity::class.java))
         }
 
         botonConsultar.setOnClickListener {
