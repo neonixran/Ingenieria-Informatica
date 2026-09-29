@@ -47,8 +47,15 @@
             btnLimpiar = new Button();
             btnCalcular = new Button();
             grpResultados = new GroupBox();
-            lblTotalNeto = new Label();
-            lblIva = new Label();
+            lblResViabilidad = new Label();
+            label8 = new Label();
+            lblResTotal = new Label();
+            label6 = new Label();
+            lblResIva = new Label();
+            label4 = new Label();
+            lblResDescuento = new Label();
+            label2 = new Label();
+            lblResSubtotal = new Label();
             lblSubtotal = new Label();
             btnSalir = new Button();
             toolTip1 = new ToolTip(components);
@@ -226,11 +233,19 @@
             btnCalcular.TabIndex = 7;
             btnCalcular.Text = "\U0001f9ee Calcular Cotización";
             btnCalcular.UseVisualStyleBackColor = false;
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // grpResultados
             // 
-            grpResultados.Controls.Add(lblTotalNeto);
-            grpResultados.Controls.Add(lblIva);
+            grpResultados.Controls.Add(lblResViabilidad);
+            grpResultados.Controls.Add(label8);
+            grpResultados.Controls.Add(lblResTotal);
+            grpResultados.Controls.Add(label6);
+            grpResultados.Controls.Add(lblResIva);
+            grpResultados.Controls.Add(label4);
+            grpResultados.Controls.Add(lblResDescuento);
+            grpResultados.Controls.Add(label2);
+            grpResultados.Controls.Add(lblResSubtotal);
             grpResultados.Controls.Add(lblSubtotal);
             grpResultados.Enabled = false;
             grpResultados.Location = new Point(16, 229);
@@ -240,32 +255,97 @@
             grpResultados.TabStop = false;
             grpResultados.Text = "Resultados";
             // 
-            // lblTotalNeto
+            // lblResViabilidad
             // 
-            lblTotalNeto.AutoSize = true;
-            lblTotalNeto.Location = new Point(21, 76);
-            lblTotalNeto.Name = "lblTotalNeto";
-            lblTotalNeto.Size = new Size(118, 15);
-            lblTotalNeto.TabIndex = 2;
-            lblTotalNeto.Text = "Total neto: $0.00 USD";
+            lblResViabilidad.AutoSize = true;
+            lblResViabilidad.ForeColor = Color.DarkGray;
+            lblResViabilidad.Location = new Point(94, 99);
+            lblResViabilidad.Name = "lblResViabilidad";
+            lblResViabilidad.Size = new Size(0, 15);
+            lblResViabilidad.TabIndex = 11;
             // 
-            // lblIva
+            // label8
             // 
-            lblIva.AutoSize = true;
-            lblIva.Location = new Point(21, 52);
-            lblIva.Name = "lblIva";
-            lblIva.Size = new Size(115, 15);
-            lblIva.TabIndex = 1;
-            lblIva.Text = "IVA (19%): $0.00 USD";
+            label8.AutoSize = true;
+            label8.Location = new Point(19, 99);
+            label8.Name = "label8";
+            label8.Size = new Size(62, 15);
+            label8.TabIndex = 10;
+            label8.Text = "Viabilidad:";
+            label8.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblResTotal
+            // 
+            lblResTotal.AutoSize = true;
+            lblResTotal.Location = new Point(94, 73);
+            lblResTotal.Name = "lblResTotal";
+            lblResTotal.Size = new Size(0, 15);
+            lblResTotal.TabIndex = 9;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(45, 73);
+            label6.Name = "label6";
+            label6.Size = new Size(36, 15);
+            label6.TabIndex = 8;
+            label6.Text = "Total:";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblResIva
+            // 
+            lblResIva.AutoSize = true;
+            lblResIva.Location = new Point(94, 58);
+            lblResIva.Name = "lblResIva";
+            lblResIva.Size = new Size(0, 15);
+            lblResIva.TabIndex = 7;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(21, 58);
+            label4.Name = "label4";
+            label4.Size = new Size(60, 15);
+            label4.TabIndex = 6;
+            label4.Text = "IVA (19%):";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblResDescuento
+            // 
+            lblResDescuento.AutoSize = true;
+            lblResDescuento.Location = new Point(94, 43);
+            lblResDescuento.Name = "lblResDescuento";
+            lblResDescuento.Size = new Size(0, 15);
+            lblResDescuento.TabIndex = 5;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(15, 43);
+            label2.Name = "label2";
+            label2.Size = new Size(66, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Descuento:";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblResSubtotal
+            // 
+            lblResSubtotal.AutoSize = true;
+            lblResSubtotal.Location = new Point(94, 28);
+            lblResSubtotal.Name = "lblResSubtotal";
+            lblResSubtotal.Size = new Size(0, 15);
+            lblResSubtotal.TabIndex = 3;
+            lblResSubtotal.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSubtotal
             // 
             lblSubtotal.AutoSize = true;
-            lblSubtotal.Location = new Point(21, 28);
+            lblSubtotal.Location = new Point(27, 28);
             lblSubtotal.Name = "lblSubtotal";
-            lblSubtotal.Size = new Size(109, 15);
+            lblSubtotal.Size = new Size(54, 15);
             lblSubtotal.TabIndex = 0;
-            lblSubtotal.Text = "Subtotal: $0.00 USD";
+            lblSubtotal.Text = "Subtotal:";
+            lblSubtotal.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnSalir
             // 
@@ -277,6 +357,7 @@
             btnSalir.TabIndex = 9;
             btnSalir.Text = "❌ Salir";
             btnSalir.UseVisualStyleBackColor = false;
+            btnSalir.Click += btnSalir_Click;
             // 
             // toolTip1
             // 
@@ -323,8 +404,6 @@
         private Button btnCalcular;
         private Button btnLimpiar;
         private GroupBox grpResultados;
-        private Label lblTotalNeto;
-        private Label lblIva;
         private Label lblSubtotal;
         private Label lblInversor;
         private TextBox txtInversor;
@@ -332,5 +411,14 @@
         private TextBox txtPresupuesto;
         private Button btnSalir;
         private ToolTip toolTip1;
+        private Label lblResSubtotal;
+        private Label lblResIva;
+        private Label label4;
+        private Label lblResDescuento;
+        private Label label2;
+        private Label lblResViabilidad;
+        private Label label8;
+        private Label lblResTotal;
+        private Label label6;
     }
 }
