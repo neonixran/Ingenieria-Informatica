@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(), AccionBotones {
         }
     }
 
-    override fun onClickFragmentButton() {
-        Toast.makeText(this, "Presionado", Toast.LENGTH_LONG).show()
+    override fun onClickFragmentButton(color: String) {
+        Toast.makeText(this, color, Toast.LENGTH_SHORT).show()
     }
 }
