@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.josue.fragments.databinding.FragmentAzulBinding
 
 class AzulFragment : Fragment() {
-    private var listener: AccionBotones? = null
+    private var listener: EventosFragment? = null
     private lateinit var binding: FragmentAzulBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -28,7 +28,7 @@ class AzulFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if (context is AccionBotones) {
+        if (context is EventosFragment) {
             listener = context
         }
     }

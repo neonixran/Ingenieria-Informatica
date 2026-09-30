@@ -1,5 +1,5 @@
 package com.josue.fragments
 
-interface AccionBotones {
+interface EventosFragment {
     fun onClickFragmentButton(color: String)
 }

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity(), AccionBotones {
+class MainActivity : AppCompatActivity(), EventosFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,6 +20,6 @@ class MainActivity : AppCompatActivity(), AccionBotones {
     }
 
     override fun onClickFragmentButton(color: String) {
-        Toast.makeText(this, color, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Presionado $color", Toast.LENGTH_SHORT).show()
     }
 }

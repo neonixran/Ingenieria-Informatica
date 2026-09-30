@@ -10,7 +10,7 @@ import com.josue.fragments.databinding.FragmentRojoBinding
 
 
 class RojoFragment : Fragment() {
-    private var listener: AccionBotones? = null
+    private var listener: EventosFragment? = null
     private lateinit var binding: FragmentRojoBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -29,7 +29,7 @@ class RojoFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if (context is AccionBotones) {
+        if (context is EventosFragment) {
             listener = context
         }
     }
