@@ -192,6 +192,7 @@
             chkFomento.Text = "Aplicar subsidio estatal de fomento (Ley Generación Distribuida)";
             toolTip1.SetToolTip(chkFomento, "Aplica un 10% de descuento directo sobre el total neto según la Ley 20.571");
             chkFomento.UseVisualStyleBackColor = true;
+            chkFomento.CheckedChanged += chkFomento_CheckedChanged;
             // 
             // lblTarifaPanel
             // 

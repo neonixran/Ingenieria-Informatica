@@ -38,12 +38,48 @@ namespace CotizadorSolarPyme.GUI
             }
         }
 
+        private void chkFomento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFomento.Checked)
+            {
+                MessageBox.Show("Se aplicará el subsidio estatal con un descuento del 15%", "Subsidio estatal", MessageBoxButtons.OK, MessageBoxIcon.None);
+            }
+        }
+
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            if (ValidarEntradas(out int paneles, out double tarifa, out double inversor, out double presupuesto))
+            if (!ValidarEntradas(out int paneles, out double tarifa, out double inversor, out double presupuesto))
             {
-
+                return; // Detener si la validación falla
             }
+
+            // Cálculos
+            double subtotal = CalcularSubtotal(paneles, tarifa, inversor);
+            double descuento = CalcularDescuentoFomento(subtotal, chkFomento.Checked);
+            double netoConDescuento = subtotal - descuento;
+            double iva = CalcularIvaChileno(netoConDescuento);
+            double total = netoConDescuento + iva;
+
+            bool esViable = EvaluarViabilidad(total, presupuesto);
+
+            // Renderizado en controles de la interfaz
+            lblResSubtotal.Text = $"$ {subtotal:F2} USD";
+            lblResDescuento.Text = $"$ {descuento:F2} USD";
+            lblResIva.Text = $"$ {iva:F2} USD";
+            lblResTotal.Text = $"$ {total:F2} USD";
+
+            if (esViable)
+            {
+                lblResViabilidad.Text = "PROYECTO VIABLE";
+                lblResViabilidad.ForeColor = Color.DarkGreen;
+            }
+            else
+            {
+                lblResViabilidad.Text = "PRESUPUESTO INSUFICIENTE";
+                lblResViabilidad.ForeColor = Color.Firebrick;
+            }
+
+            grpResultados.Enabled = true;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -113,15 +149,15 @@ namespace CotizadorSolarPyme.GUI
 
                 return false;
             }
-            
-            if(!double.TryParse(txtInversor.Text, out inversor) || (inversor < 100.0 || inversor > 10000.0))
+
+            if (!double.TryParse(txtInversor.Text, out inversor) || (inversor < 100.0 || inversor > 10000.0))
             {
                 MessageBox.Show("Debe ingresar un costo de inversor válido entre $100 y $10.000 USD", "Inversor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txtInversor.Focus();
 
                 return false;
-            } 
-            
+            }
+
             if (!double.TryParse(txtPresupuesto.Text, out presupuesto) || (presupuesto < 500.0 || presupuesto > 100000.0))
             {
                 MessageBox.Show("Debe ingresar un presupuesto válido entre $500 y $100.000 USD", "Presupuesto", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -131,6 +167,27 @@ namespace CotizadorSolarPyme.GUI
             }
 
             return true;
+        }
+
+        private double CalcularSubtotal(int paneles, double tarifa, double inversor)
+        {
+            return (paneles * tarifa) + inversor;
+        }
+
+        private double CalcularDescuentoFomento(double subtotal, bool aplicaFomento)
+        {
+            return aplicaFomento ? subtotal * 0.15 : 0.0;
+        }
+
+        private double CalcularIvaChileno(double netoAfecto)
+        {
+            return netoAfecto * 0.19;
+        }
+
+        private bool EvaluarViabilidad(double totalCotizado, double presupuestoCliente)
+        {
+            // Margen de tolerancia del 10% adicional con crédito verde
+            return totalCotizado <= (presupuestoCliente * 1.10);
         }
     }
 }
