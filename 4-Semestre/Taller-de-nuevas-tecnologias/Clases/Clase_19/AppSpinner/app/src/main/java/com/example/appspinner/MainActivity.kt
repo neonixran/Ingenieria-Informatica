@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnProductos = findViewById<Button>(R.id.btnProductos)
         val btnVentas = findViewById<Button>(R.id.btnVenta)
+        val btnTabla = findViewById<Button>(R.id.btnTabla)
 
         btnProductos.setOnClickListener {
             startActivity(Intent(this, ProductosActivity::class.java))
@@ -31,6 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         btnVentas.setOnClickListener {
             startActivity(Intent(this, VentasActivity::class.java))
+            finish()
+        }
+
+        btnTabla.setOnClickListener {
+            startActivity(Intent(this, TablaDatosActivity::class.java))
             finish()
         }
     }

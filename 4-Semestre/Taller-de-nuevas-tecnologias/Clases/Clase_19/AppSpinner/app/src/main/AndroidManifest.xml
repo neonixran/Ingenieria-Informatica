@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.APPSpinner">
         <activity
+            android:name=".TablaDatosActivity"
+            android:exported="false" />
+        <activity
             android:name=".ventas.VentasActivity"
             android:exported="false" />
         <activity
