@@ -53,14 +53,16 @@ namespace CotizadorSolarPyme.GUI
                 return; // Detener si la validación falla
             }
 
-            // Cálculos
-            double subtotal = CalcularSubtotal(paneles, tarifa, inversor);
-            double descuento = CalcularDescuentoFomento(subtotal, chkFomento.Checked);
-            double netoConDescuento = subtotal - descuento;
-            double iva = CalcularIvaChileno(netoConDescuento);
-            double total = netoConDescuento + iva;
+            // Instanciar la clase
+            CotizacionSolar cotizador = new CotizacionSolar(txtPyme.Text, cboComuna.Text, paneles, tarifa, inversor, chkFomento.Checked, presupuesto);
 
-            bool esViable = EvaluarViabilidad(total, presupuesto);
+            double subtotal = cotizador.CalcularSubtotal();
+            double descuento = cotizador.CalcularMontoDescuento();
+            double netoConDescuento = cotizador.CalcularNetoConDescuento();
+            double iva = cotizador.CalcularMontoIva();
+            double total = cotizador.CalcularCotizacion();
+
+            bool esViable = cotizador.EvaluarViabilidadEconomica();
 
             // Renderizado en controles de la interfaz
             lblResSubtotal.Text = $"$ {subtotal:F2} USD";
@@ -167,27 +169,6 @@ namespace CotizadorSolarPyme.GUI
             }
 
             return true;
-        }
-
-        private double CalcularSubtotal(int paneles, double tarifa, double inversor)
-        {
-            return (paneles * tarifa) + inversor;
-        }
-
-        private double CalcularDescuentoFomento(double subtotal, bool aplicaFomento)
-        {
-            return aplicaFomento ? subtotal * 0.15 : 0.0;
-        }
-
-        private double CalcularIvaChileno(double netoAfecto)
-        {
-            return netoAfecto * 0.19;
-        }
-
-        private bool EvaluarViabilidad(double totalCotizado, double presupuestoCliente)
-        {
-            // Margen de tolerancia del 10% adicional con crédito verde
-            return totalCotizado <= (presupuestoCliente * 1.10);
         }
     }
 }
