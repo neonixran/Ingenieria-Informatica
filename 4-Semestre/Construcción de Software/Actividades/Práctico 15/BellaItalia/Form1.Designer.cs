@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             grpCliente = new GroupBox();
             txtTelefono = new TextBox();
             lblTelefono = new Label();
@@ -95,7 +96,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Location = new Point(207, 37);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(56, 15);
+            lblTelefono.Size = new Size(55, 15);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "Teléfono:";
             // 
@@ -134,7 +135,7 @@
             chkTocino.AutoSize = true;
             chkTocino.Location = new Point(95, 46);
             chkTocino.Name = "chkTocino";
-            chkTocino.Size = new Size(62, 19);
+            chkTocino.Size = new Size(61, 19);
             chkTocino.TabIndex = 4;
             chkTocino.Text = "Tocino";
             chkTocino.UseVisualStyleBackColor = true;
@@ -174,7 +175,7 @@
             chkQuesoExtra.AutoSize = true;
             chkQuesoExtra.Location = new Point(11, 21);
             chkQuesoExtra.Name = "chkQuesoExtra";
-            chkQuesoExtra.Size = new Size(88, 19);
+            chkQuesoExtra.Size = new Size(89, 19);
             chkQuesoExtra.TabIndex = 0;
             chkQuesoExtra.Text = "Queso extra";
             chkQuesoExtra.UseVisualStyleBackColor = true;
@@ -202,11 +203,13 @@
             // txtTotalValor
             // 
             txtTotalValor.AutoSize = true;
+            txtTotalValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            txtTotalValor.ForeColor = Color.DarkGreen;
             txtTotalValor.Location = new Point(212, 131);
             txtTotalValor.Name = "txtTotalValor";
-            txtTotalValor.Size = new Size(19, 15);
+            txtTotalValor.Size = new Size(57, 20);
             txtTotalValor.TabIndex = 10;
-            txtTotalValor.Text = "$0";
+            txtTotalValor.Text = "$0 CLP";
             txtTotalValor.TextAlign = ContentAlignment.TopRight;
             // 
             // txtIvaValor
@@ -214,27 +217,28 @@
             txtIvaValor.AutoSize = true;
             txtIvaValor.Location = new Point(212, 92);
             txtIvaValor.Name = "txtIvaValor";
-            txtIvaValor.Size = new Size(19, 15);
+            txtIvaValor.Size = new Size(43, 15);
             txtIvaValor.TabIndex = 9;
-            txtIvaValor.Text = "$0";
+            txtIvaValor.Text = "$0 CLP";
             // 
             // txtDeliveryValor
             // 
             txtDeliveryValor.AutoSize = true;
             txtDeliveryValor.Location = new Point(212, 72);
             txtDeliveryValor.Name = "txtDeliveryValor";
-            txtDeliveryValor.Size = new Size(19, 15);
+            txtDeliveryValor.Size = new Size(43, 15);
             txtDeliveryValor.TabIndex = 8;
-            txtDeliveryValor.Text = "$0";
+            txtDeliveryValor.Text = "$0 CLP";
             // 
             // txtDescuentoValor
             // 
             txtDescuentoValor.AutoSize = true;
+            txtDescuentoValor.ForeColor = SystemColors.ControlText;
             txtDescuentoValor.Location = new Point(212, 52);
             txtDescuentoValor.Name = "txtDescuentoValor";
-            txtDescuentoValor.Size = new Size(19, 15);
+            txtDescuentoValor.Size = new Size(43, 15);
             txtDescuentoValor.TabIndex = 7;
-            txtDescuentoValor.Text = "$0";
+            txtDescuentoValor.Text = "$0 CLP";
             txtDescuentoValor.TextAlign = ContentAlignment.MiddleRight;
             // 
             // txtSubtotalValor
@@ -242,17 +246,19 @@
             txtSubtotalValor.AutoSize = true;
             txtSubtotalValor.Location = new Point(212, 32);
             txtSubtotalValor.Name = "txtSubtotalValor";
-            txtSubtotalValor.Size = new Size(19, 15);
+            txtSubtotalValor.Size = new Size(43, 15);
             txtSubtotalValor.TabIndex = 6;
-            txtSubtotalValor.Text = "$0";
+            txtSubtotalValor.Text = "$0 CLP";
             txtSubtotalValor.TextAlign = ContentAlignment.TopRight;
             // 
             // lblTotalValor
             // 
             lblTotalValor.AutoSize = true;
+            lblTotalValor.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTotalValor.ForeColor = Color.DarkGreen;
             lblTotalValor.Location = new Point(10, 131);
             lblTotalValor.Name = "lblTotalValor";
-            lblTotalValor.Size = new Size(95, 15);
+            lblTotalValor.Size = new Size(131, 21);
             lblTotalValor.TabIndex = 5;
             lblTotalValor.Text = "TOTAL A PAGAR:";
             // 
@@ -363,7 +369,7 @@
             lblMasa.AutoSize = true;
             lblMasa.Location = new Point(9, 54);
             lblMasa.Name = "lblMasa";
-            lblMasa.Size = new Size(65, 15);
+            lblMasa.Size = new Size(64, 15);
             lblMasa.TabIndex = 6;
             lblMasa.Text = "Tipo Masa:";
             // 
@@ -381,7 +387,7 @@
             lblTamano.AutoSize = true;
             lblTamano.Location = new Point(9, 25);
             lblTamano.Name = "lblTamano";
-            lblTamano.Size = new Size(53, 15);
+            lblTamano.Size = new Size(52, 15);
             lblTamano.TabIndex = 4;
             lblTamano.Text = "Tamaño:";
             // 
@@ -437,8 +443,9 @@
             Controls.Add(groupBox1);
             Controls.Add(grpIngredientes);
             Controls.Add(grpCliente);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
-            Text = "🍕 Sistema de Pedidos - Pizzería Bella Italia (v1.0)";
+            Text = "Sistema de Pedidos - Pizzería Bella Italia (v1.0)";
             Load += Form1_Load;
             grpCliente.ResumeLayout(false);
             grpCliente.PerformLayout();

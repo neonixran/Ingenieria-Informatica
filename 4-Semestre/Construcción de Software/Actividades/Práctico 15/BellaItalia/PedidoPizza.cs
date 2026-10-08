@@ -54,16 +54,16 @@ namespace BellaItalia
         {
             switch (Tamano)
             {
-                case "Personal ($5.000)" :
+                case "Personal" :
                     return PRECIO_PERSONAL;
-                case "Mediana ($8.500)":
+                case "Mediana":
                     return PRECIO_MEDIANA;
-                case "Familiar ($12.000)":
+                case "Familiar":
                     return PRECIO_FAMILIAR;
+                default:
+                    return PRECIO_MEDIANA;
 
             }
-
-            return PRECIO_MEDIANA;
         }
 
         public double CalcularCostoMasa()
@@ -130,7 +130,7 @@ namespace BellaItalia
 
         public double CalcularNetoAfecto()
         {
-            return CalcularSubtotalPizza() + CalcularMontoDescuento() + CalcularCostoDelivery();
+            return CalcularSubtotalPizza() + CalcularCostoDelivery() - CalcularMontoDescuento();
         }
 
         public double CalcularMontoIva()

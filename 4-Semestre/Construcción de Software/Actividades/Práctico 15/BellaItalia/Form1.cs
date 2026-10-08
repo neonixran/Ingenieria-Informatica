@@ -11,9 +11,6 @@ namespace BellaItalia
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Estandarización regional de decimales
-            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-
             // Poblar ComboBoxes de forma dinámica
             cboTamano.Items.Clear();
             cboTamano.Items.Add("Personal ($5.000)");
@@ -53,7 +50,7 @@ namespace BellaItalia
                 txtCliente.Text,
                 txtTelefono.Text,
                 cboTamano.Text.Split(" ")[0],
-                cboMasa.Text.Split(" ")[0],
+                cboMasa.Text.Split(" (")[0],
                 chkQuesoExtra.Checked,
                 chkPepperoni.Checked,
                 chkChampinones.Checked,
@@ -81,12 +78,21 @@ namespace BellaItalia
             double totalPagar = pedido.CalcularTotalPagar();
 
             // Renderizar resultados financieros formateados en CLP
-            txtSubtotalValor.Text = $"${subtotal.ToString()}";
-            txtDescuentoValor.Text = $"-${montoDescuento.ToString()}";
-            txtDeliveryValor.Text = $"${costoDelivery.ToString()}";
-            txtIvaValor.Text = $"${montoIva.ToString()}";
+            txtSubtotalValor.Text = $"${subtotal:N2} CLP";
 
-            txtTotalValor.Text = $"${totalPagar.ToString()}";
+            txtDescuentoValor.Text = $"-${montoDescuento:N2} CLP";
+            txtDescuentoValor.ForeColor = Color.Red;
+            txtDescuentoValor.Left = 207;
+
+            txtDeliveryValor.Text = $"+${costoDelivery:N2} CLP";
+            txtDeliveryValor.Left = 204;
+
+            txtIvaValor.Text = $"+${montoIva:N2} CLP";
+            txtIvaValor.Left = 204;
+
+            txtTotalValor.Text = $"${totalPagar:N2} CLP";
+
+            btnConfirmar.Enabled = true;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -112,7 +118,7 @@ namespace BellaItalia
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show(
-                $"¿Desea registrar y enviar el pedido de {txtCliente.Text.Trim()} por un total de {lblTotalValor.Text}?",
+                $"¿Desea registrar y enviar el pedido de {txtCliente.Text.Trim()} por un total de {txtTotalValor.Text}?",
                 "Confirmación de Pedido",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
@@ -127,11 +133,16 @@ namespace BellaItalia
 
         private void LimpiarResumen()
         {
-            txtSubtotalValor.Text = "$ 0 CLP";
-            txtDescuentoValor.Text = "$ 0 CLP";
-            txtDeliveryValor.Text = "$ 0 CLP";
-            txtIvaValor.Text = "$ 0 CLP";
-            lblTotalValor.Text = "$ 0 CLP";
+            txtSubtotalValor.Text = "$0 CLP";
+            txtDescuentoValor.Text = "$0 CLP";
+            txtDescuentoValor.ForeColor = Color.Black;
+            txtDescuentoValor.Left = 212;
+            txtDeliveryValor.Text = "$0 CLP";
+            txtDeliveryValor.Left = 212;
+            txtIvaValor.Text = "$0 CLP";
+            txtIvaValor.Left = 212;
+            txtTotalValor.Text = "$0 CLP";
+
             btnConfirmar.Enabled = false;
         }
     }
