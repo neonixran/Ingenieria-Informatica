@@ -75,7 +75,7 @@ namespace BellaItalia
 
             return CalcularPrecioTamano();
         }
-        
+
         public int ContarIngredientesExtra()
         {
             int cantidadIngredientesExtras = 0;
